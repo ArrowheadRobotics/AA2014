@@ -384,7 +384,20 @@ CommandBasedRobotTemplate/Debug/Objects/CB14/Subsystems/Claw.o:  \
   C:/WindRiver/vxworks-6.3/target/h/WPILib/Vision/ColorImage.h \
   C:/WindRiver/vxworks-6.3/target/h/WPILib/WPIErrors.h \
   C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../Robotmap.h \
-  C:/WindRiver/vxworks-6.3/target/h/WPILib/WPILib.h
+  C:/WindRiver/vxworks-6.3/target/h/WPILib/WPILib.h \
+  C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../Robot.h \
+  C:/WindRiver/vxworks-6.3/target/h/WPILib/Commands/Command.h \
+  C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../RobotMap.h \
+  C:/WindRiver/vxworks-6.3/target/h/WPILib/LiveWindow/LiveWindow.h \
+  C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../Commands/AutonomousCommand.h \
+  C:/WindRiver/vxworks-6.3/target/h/WPILib/Commands/Subsystem.h \
+  C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../Commands/../Robot.h \
+  C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../Subsystems/Arm.h \
+  C:/WindRiver/vxworks-6.3/target/h/WPILib/Commands/Subsystem.h \
+  C:/WindRiver/vxworks-6.3/target/h/WPILib/WPILib.h \
+  C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../Subsystems/Claw.h \
+  C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../Subsystems/Drive.h \
+  C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../OI.h
 
 C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/Claw.h:
 
@@ -1155,3 +1168,29 @@ C:/WindRiver/vxworks-6.3/target/h/WPILib/WPIErrors.h:
 C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../Robotmap.h:
 
 C:/WindRiver/vxworks-6.3/target/h/WPILib/WPILib.h:
+
+C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../Robot.h:
+
+C:/WindRiver/vxworks-6.3/target/h/WPILib/Commands/Command.h:
+
+C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../RobotMap.h:
+
+C:/WindRiver/vxworks-6.3/target/h/WPILib/LiveWindow/LiveWindow.h:
+
+C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../Commands/AutonomousCommand.h:
+
+C:/WindRiver/vxworks-6.3/target/h/WPILib/Commands/Subsystem.h:
+
+C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../Commands/../Robot.h:
+
+C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../Subsystems/Arm.h:
+
+C:/WindRiver/vxworks-6.3/target/h/WPILib/Commands/Subsystem.h:
+
+C:/WindRiver/vxworks-6.3/target/h/WPILib/WPILib.h:
+
+C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../Subsystems/Claw.h:
+
+C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../Subsystems/Drive.h:
+
+C:/Users/Alex/Documents/GitHub/2014AA/CB14/Subsystems/../OI.h:
