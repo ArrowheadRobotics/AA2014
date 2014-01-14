@@ -52,6 +52,8 @@ void Claw::fire()
 	Robot::claw->triggerSol2->Set(Relay::kOn);		//Push out Trigger
 	Robot::claw->shooterSol1->Set(Relay::kOn);		//Pressurize Shooter Solenoids
 	
+	//todo Test this Function-most likely won't work
+	
 }
 
 
