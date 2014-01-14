@@ -41,3 +41,6 @@ void Drive::InitDefaultCommand() {
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
+void Drive::M_Drive(Joystick* joy1, Joystick* joy2){
+	driveTrain->TankDrive(joy1, joy2);
+}
