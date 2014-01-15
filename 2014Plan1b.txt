@@ -1,0 +1,65 @@
+Plan
+
+need-
+claw subsystem
+-Intake roller
+-Intake arm
+-Shooting
+--Two trigger solenoids
+--Firing solenoid
+--Pull trigger- Bring trigger solenoids in
+--Firing solenoids will have pressure
+--Pushing the ball out
+--Wait until microswitch is hit to pushing firing pistons back in
+--Trigger pins will go out and the firing pistons will respressurize
+-Major Pivot Joint
+--Controlled by motor
+---Potentiometer for location detection
+-
+
+
+Drive Subsystem
+-Drive Train
+--4 Cims
+---Two per gearbox
+---Pneumatic shifter to shift speeds
+-Tank Drive
+--Controlled by two joysticks
+-
+
+Vision Subsystem
+-Camera
+-
+
+Commands
+-Using Claw Subsystem
+--Firing Command
+--Control Intake Motor on Arm
+--Raise/Lower Intake Arm
+--Move the Claw Joint
+-Using Drive Subsystem
+--TankDrive
+--Autonomous
+---Vision for detecting hot goal
+-
+
+Who is Doing What
+-Danny
+--Intake Arm
+--Intake Roller
+--
+-Alex
+--Vision
+--Autonomous
+--Firing
+--
+-Travis
+--Major Pivot Joint
+---Potentiometer
+--Pneumatics
+---Shifter for Drive Subsystem
+--
+
+
+-Done
+--Driving
