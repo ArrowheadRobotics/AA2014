@@ -97,9 +97,4 @@ void RobotMap::init() {
 	armrollerrelay1 = new Relay(1, 7);
 	lw->AddActuator("Arm","rollerRelay1", armrollerrelay1);
 	
-	//armrollerrelay2 = new Relay(1, 8);
-	//lw->AddActuator("Arm","rollerRelay2", armrollerrelay2);
-	
-	//armrollerrelay3 = new Relay(1, 9);
-	//lw->AddActuator("Arm","rollerRelay3", armrollerrelay3);
 }
