@@ -21,12 +21,12 @@ RollerForward::RollerForward() {
 
 // Called just before this Command runs the first time
 void RollerForward::Initialize() {
-
+	Robot::arm->roll1()->Set(Relay::kOn);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void RollerForward::Execute() {
-//	Robot::arm->roll1()->Set(Relay::kOn);
+	
 }
 
 // Make this return true when this Command no longer needs to run execute()
