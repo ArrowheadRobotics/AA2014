@@ -10,6 +10,9 @@
 
 
 #include "RollerBackwards.h"
+#include "../Subsystems/Arm.h"
+#include "../Robot.h"
+
 
 RollerBackwards::RollerBackwards() {
 	// Use requires() here to declare subsystem dependencies
@@ -25,7 +28,7 @@ void RollerBackwards::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void RollerBackwards::Execute() {
-	
+	Robot::arm->roll1->Set(Relay::kReverse);
 }
 
 // Make this return true when this Command no longer needs to run execute()

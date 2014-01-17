@@ -10,6 +10,8 @@
 
 
 #include "RollerStop.h"
+#include "../Subsystems/Arm.h"
+#include "../Robot.h"
 
 RollerStop::RollerStop() {
 	// Use requires() here to declare subsystem dependencies
@@ -25,7 +27,7 @@ void RollerStop::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void RollerStop::Execute() {
-	
+	Robot::arm->roll1->Set(Relay::kOff);
 }
 
 // Make this return true when this Command no longer needs to run execute()
