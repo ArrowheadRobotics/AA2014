@@ -38,6 +38,8 @@ public:
 	Drive();
 	void InitDefaultCommand();
 	void M_Drive(Joystick* joy1, Joystick* joy2);
+	void toggle();
+	bool toggleState;
 };
 
 #endif

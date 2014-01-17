@@ -10,6 +10,7 @@
 
 
 #include "SwitchShift.h"
+#include "../Subsystems/Drive.h"
 
 SwitchShift::SwitchShift() {
 	// Use requires() here to declare subsystem dependencies
@@ -20,7 +21,7 @@ SwitchShift::SwitchShift() {
 
 // Called just before this Command runs the first time
 void SwitchShift::Initialize() {
-	
+	Robot::drive->toggle();
 }
 
 // Called repeatedly when this Command is scheduled to run
