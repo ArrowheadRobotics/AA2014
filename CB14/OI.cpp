@@ -95,3 +95,12 @@ Joystick* OI::getjoy1() {
 JoystickButton* OI::getjoy1Trigger() {
 	return joy1Trigger;
 }
+JoystickButton* OI::getrollerBtn1() {
+	return rollerBtn1;
+}
+JoystickButton* OI::getrollerBtn2() {
+	return rollerBtn2;
+}
+JoystickButton* OI::getrollerBtn3() {
+	return rollerBtn3;
+}

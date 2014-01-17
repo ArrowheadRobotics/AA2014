@@ -31,8 +31,8 @@ else
 MODE_DIR := NonDebug
 endif
 OBJ_DIR := .
-WS_ROOT_DIR := C:/Users/Alex/Documents/GitHub
-PRJ_ROOT_DIR := $(WS_ROOT_DIR)/2014AA/CB14
+WS_ROOT_DIR := C:/WindRiver
+PRJ_ROOT_DIR := C:/Users/Danny/Documents/GitHub/2014AA/CB14
 
 
 
