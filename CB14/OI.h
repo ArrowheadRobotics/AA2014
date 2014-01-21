@@ -41,6 +41,8 @@ public:
 	JoystickButton* getrollerBtn1();
 	JoystickButton* getrollerBtn2();
 	JoystickButton* getrollerBtn3();
+	JoystickButton* getarmBtn1();
+	JoystickButton* getarmBtn2();
 };
 
 #endif

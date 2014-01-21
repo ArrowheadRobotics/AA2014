@@ -25,7 +25,7 @@ void ArmDrop::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ArmDrop::Execute() {
-	
+	Robot::arm->lifter1->Set(-.1);
 }
 
 // Make this return true when this Command no longer needs to run execute()

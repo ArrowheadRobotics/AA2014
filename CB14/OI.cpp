@@ -104,3 +104,9 @@ JoystickButton* OI::getrollerBtn2() {
 JoystickButton* OI::getrollerBtn3() {
 	return rollerBtn3;
 }
+JoystickButton* OI::getarmBtn1() {
+	return armBtn1;
+}
+JoystickButton* OI::getarmBtn2() {
+	return armBtn2;
+}
