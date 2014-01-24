@@ -11,6 +11,7 @@
 
 #include "SwitchShift.h"
 #include "../Subsystems/Drive.h"
+#include "../RobotMap.h"
 
 SwitchShift::SwitchShift() {
 	// Use requires() here to declare subsystem dependencies
@@ -21,12 +22,13 @@ SwitchShift::SwitchShift() {
 
 // Called just before this Command runs the first time
 void SwitchShift::Initialize() {
-	Robot::drive->toggle();
+	printf("Gear changed\n");
 }
 
 // Called repeatedly when this Command is scheduled to run
 void SwitchShift::Execute() {
-	
+	RobotMap::driveswitchSol1->Set(true);
+	RobotMap::driveswitchSol2->Set(false);
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -36,11 +38,15 @@ bool SwitchShift::IsFinished() {
 
 // Called once after isFinished returns true
 void SwitchShift::End() {
-	
+	RobotMap::driveswitchSol1->Set(false);
+	RobotMap::driveswitchSol2->Set(true);
+	printf("Gear reset\n");
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void SwitchShift::Interrupted() {
-
+	RobotMap::driveswitchSol1->Set(false);
+	RobotMap::driveswitchSol2->Set(true);
+	printf("Gear reset\n");
 }
