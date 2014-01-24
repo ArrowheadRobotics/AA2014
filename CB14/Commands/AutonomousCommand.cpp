@@ -10,6 +10,10 @@
 
 
 #include "AutonomousCommand.h"
+#include "../RobotMap.h"
+#include "Fire.h"
+
+bool hot = false;
 
 AutonomousCommand::AutonomousCommand() {
 	// Use requires() here to declare subsystem dependencies
@@ -20,13 +24,30 @@ AutonomousCommand::AutonomousCommand() {
 
 // Called just before this Command runs the first time
 void AutonomousCommand::Initialize() {
-	
+	RobotMap::driveenLeft->Reset();
+	RobotMap::driveenRight->Reset();
+	RobotMap::drivebackLeftDrive->Set(.4);
+	RobotMap::drivebackRightDrive->Set(.4);
+	RobotMap::drivefrontLeftDrive->Set(.4);
+	RobotMap::drivefrontRightDrive->Set(.4);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void AutonomousCommand::Execute() {
-	
+	if(RobotMap::driveenLeft->Get() && RobotMap::driveenRight->Get() > 4000) {
+		RobotMap::drivebackLeftDrive->Set(0);
+		RobotMap::drivebackRightDrive->Set(0);
+		RobotMap::drivefrontLeftDrive->Set(0);
+		RobotMap::drivefrontRightDrive->Set(0);
+		while(hot == false) {
+			
+		}
+		if(hot == true) {
+			Fire();
+		}
+	}
 }
+
 
 // Make this return true when this Command no longer needs to run execute()
 bool AutonomousCommand::IsFinished() {
