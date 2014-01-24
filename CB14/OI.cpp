@@ -45,7 +45,7 @@ OI::OI() {
 	joy2 = new Joystick(2);
 	
 	joy2Trigger = new JoystickButton(joy2, 1);		//Right Trigger
-	joy2Trigger->WhenPressed(new SwitchShift());
+	joy2Trigger->WhileHeld(new SwitchShift());
 	joy1 = new Joystick(1);
 	
 	joy1Trigger = new JoystickButton(joy1, 1);		//Left Trigger
