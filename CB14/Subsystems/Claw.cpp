@@ -38,19 +38,18 @@ void Claw::InitDefaultCommand() {
 
 void Claw::fire()
 {
-	//todo LIFT INTAKE ARM HERE
-	Robot::claw->triggerSol1->Set(Relay::kOn);		//Pull in Trigger
-	Robot::claw->triggerSol2->Set(Relay::kOff);		//Pull in Trigger
-	Robot::claw->shooterSol1->Set(Relay::kOff);		//No Pressure to Shooter Solenoids
-	while(!Robot::claw->ballSwitch->Get() || !Robot::oi->getjoy1Trigger())
+	Robot::arm->lifter1->Set(.1); 				//Lifts the Arm up
+	Robot::claw->triggerSol1->Set(true);		//Pull in Trigger
+	Robot::claw->triggerSol2->Set(false);		//Pull in Trigger
+	Robot::claw->shooterSol1->Set(false);		//No Pressure to Shooter Solenoids
+	while(!Robot::claw->ballSwitch->Get() || !Robot::oi->getjoythumb1()->Get())
 	{
 		//Waiting until microswitch is hit
 		//or until loop is exited by pressing button
-		//todo Make new button function instead of joy1Trigger-will call command again
 	}
-	Robot::claw->triggerSol1->Set(Relay::kOff);		//Push out Trigger
-	Robot::claw->triggerSol2->Set(Relay::kOn);		//Push out Trigger
-	Robot::claw->shooterSol1->Set(Relay::kOn);		//Pressurize Shooter Solenoids
+	Robot::claw->triggerSol1->Set(false);		//Push out Trigger
+	Robot::claw->triggerSol2->Set(true);		//Push out Trigger
+	Robot::claw->shooterSol1->Set(true);		//Pressurize Shooter Solenoids
 	
 	//todo Test this Function-most likely won't work
 	
