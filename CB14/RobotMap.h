@@ -43,6 +43,7 @@ public:
 	static AnalogChannel* clawPot1;
 	//static Potentiometer* clawPot2;
 
+
 	static void init();
 };
 #endif

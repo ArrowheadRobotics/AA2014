@@ -102,7 +102,9 @@ void RobotMap::init() {
 	
 	compressor = new Compressor(10,2);
 	
-	clawPot1 = new AnalogChannel(1, 9); //todo find the actual information for this pot (slot, channel, scale, offset)
+	clawPot1 = new AnalogChannel(1, 9); 
 	
+	clawPot1 = new AnalogChannel(1, 9);
+	lw->AddSensor("Claw", "Pot1", clawPot1);
 	
 }
