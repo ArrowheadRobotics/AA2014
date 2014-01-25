@@ -40,6 +40,8 @@ public:
 	static Relay* armrollerrelay1;
 	static SpeedController* armlifter1;
 	static Compressor* compressor;
+	static AnalogChannel* clawPot1;
+	//static Potentiometer* clawPot2;
 
 	static void init();
 };
