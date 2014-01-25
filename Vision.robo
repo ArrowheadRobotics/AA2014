@@ -13,7 +13,7 @@
   <is_active>TRUE</is_active>
   <password>FRC</password>
   <port>80</port>
-  <resolution>3</resolution>
+  <resolution>1</resolution>
   <sharpness_value>50</sharpness_value>
   <username>FRC</username>
 </Axis_Internet_Camera>
@@ -28,3 +28,136 @@
   <crop_image>FALSE</crop_image>
   <scale>1000.0</scale>
 </Radial_Distortion>
+<RGB_Filter>
+  <channel>1</channel>
+  <hue_value>80</hue_value>
+  <hysteresis>0</hysteresis>
+  <min_value>200</min_value>
+</RGB_Filter>
+<Adaptive_Threshold>
+  <channel_type>1</channel_type>
+  <filter_size>20</filter_size>
+  <max_threshold>255</max_threshold>
+  <mean_offset>5</mean_offset>
+  <min_threshold>0</min_threshold>
+  <result_type>1</result_type>
+</Adaptive_Threshold>
+<Blob_Filter>
+  <create_blob_array_variable>FALSE</create_blob_array_variable>
+  <filters>
+    <tab>
+      <filter>
+        <count_threshold>0</count_threshold>
+        <create_array>0</create_array>
+        <filter_id>8</filter_id>
+        <invert_count>0</invert_count>
+        <invert_threshold>0</invert_threshold>
+        <minimum_size>1000</minimum_size>
+        <weight_threshold>0</weight_threshold>
+      </filter>
+      <filter:2>
+        <count_threshold>0</count_threshold>
+        <create_array>0</create_array>
+        <filter_id>63</filter_id>
+        <invert_count>0</invert_count>
+        <invert_threshold>0</invert_threshold>
+        <ratio>2.85000</ratio>
+        <weight_threshold>0</weight_threshold>
+      </filter:2>
+    </tab>
+    <tab:2/>
+    <tab:3/>
+    <tab:4/>
+    <tab:5/>
+    <tab:6/>
+  </filters>
+  <largest_is_background>FALSE</largest_is_background>
+  <show_weights>FALSE</show_weights>
+  <sort_array_on_x>FALSE</sort_array_on_x>
+  <sort_array_on_y>FALSE</sort_array_on_y>
+</Blob_Filter>
+<Blob_Replace>
+  <color_index>6</color_index>
+  <fill_shape>TRUE</fill_shape>
+  <order_array_on_x>FALSE</order_array_on_x>
+  <order_array_on_y>FALSE</order_array_on_y>
+  <shape_index>12</shape_index>
+  <thickness>1</thickness>
+</Blob_Replace>
+<VBScript_Program>
+  <script>list = GetArrayVariable("BFR_COORDINATES")
+if isArray(list) then
+  if ubound(list) &gt; 0 then
+
+    targetPixelHeight = 0
+    targetSamples = 0
+
+    ' calibrated for an Axis camera
+    imageHeight = GetVariable("IMAGE_HEIGHT")
+    cameraFieldOfView = 47.5
+    ' specify the known height of the target (12 inches)
+    targetHeight = 12.0
+
+    ' grab list of coordinates from blob_replace
+    ' note the array is sorted by previous module in a specific order
+    righty = list(1)
+    rightyy = list(7)
+    lefty = list(3)
+    leftyy = list(5)
+
+    ' based on these two side lines get the center line height
+    ' the center line is used since we want to aim to the center
+    ' of the target. This also removes any perspective distortion
+    ' where the right or left size may be a couple inches closer
+    ' or further away from the camera
+    targetPixelHeight = ((lefty - leftyy) + (righty - rightyy)) / 2
+
+    ' we can use a known distance to determine FOV if we don't know it
+    ' measuredDistance = 10.0*12.0
+    ' write "Calculated FOV " _
+    '   (((atan((((targetHeight*imageHeight)/targetPixelHeight)/2) _
+    '   /measuredDistance)*2.0)*180.0)/3.14159) &amp; vbCRLF
+
+    ' determine distance in inches
+    totalDistance = (((targetHeight*imageHeight)/targetPixelHeight)/2)/ _
+      tan(((cameraFieldOfView*3.14159)/180.0)/2.0)
+
+    SetVariable "Distance", CInt((totalDistance*100)/12)/100
+
+  end if
+end if
+
+Dim fi
+Dim fso
+set fso = CreateObject("Scripting.FileSystemObject")
+set fi = fso.OpenTextFile("c:\Temp\test.txt",8, true)
+if err.number = 0 then
+	fi.writeLine GetVariable("cog_x") &amp; ":" &amp; _
+		GetVariable("cog_y")
+	fi.close
+end if
+set fi=nothing
+set fso=nothing</script>
+  <source_mode>gui</source_mode>
+  <tab_size_index>1</tab_size_index>
+</VBScript_Program>
+<Math>
+  <all_channels>TRUE</all_channels>
+  <bias>0</bias>
+  <divisor>1</divisor>
+  <function>5</function>
+  <image1>Source</image1>
+  <image2>Current</image2>
+</Math>
+<Set_Variable>
+  <set_1_array>FALSE</set_1_array>
+  <set_1_once>FALSE</set_1_once>
+  <set_2_array>FALSE</set_2_array>
+  <set_2_once>FALSE</set_2_once>
+  <set_3_array>FALSE</set_3_array>
+  <set_3_once>FALSE</set_3_once>
+  <set_4_array>FALSE</set_4_array>
+  <set_4_once>FALSE</set_4_once>
+  <value_1>[BFR_COORDINATES]</value_1>
+  <variable_1>/SmartDashboard/BFR_COORDINATES</variable_1>
+</Set_Variable>
