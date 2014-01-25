@@ -36,7 +36,7 @@ void ClawMid::Execute() {
 	if (midspd <.1 && midspd !=0) {
 		midspd = .1;
 	}
-	if(midat>20) {
+	if(midat>10) {
 		midspd = 0;
 	}
 	RobotMap::clawlifter->Set(midspd);
