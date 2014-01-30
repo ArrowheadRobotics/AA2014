@@ -1,0 +1,137 @@
+<head><version>2.59.2</version></head>
+<Axis_Internet_Camera>
+  <auto_back_light>TRUE</auto_back_light>
+  <auto_exposure>FALSE</auto_exposure>
+  <auto_white_balance>TRUE</auto_white_balance>
+  <brightness_value>50</brightness_value>
+  <camera_type>1</camera_type>
+  <color_level_value>50</color_level_value>
+  <compression_index>3</compression_index>
+  <contrast_value>50</contrast_value>
+  <exposure_value>50</exposure_value>
+  <ip_address>10.7.6.11</ip_address>
+  <is_active>TRUE</is_active>
+  <password>FRC</password>
+  <port>80</port>
+  <resolution>3</resolution>
+  <sharpness_value>50</sharpness_value>
+  <username>FRC</username>
+</Axis_Internet_Camera>
+<Radial_Distortion>
+  <center_x>0.5</center_x>
+  <center_y>0.5</center_y>
+  <coeff_a>-1000.0</coeff_a>
+  <coeff_b>0.69</coeff_b>
+  <coeff_c>0.0</coeff_c>
+  <coeff_d>0.0</coeff_d>
+  <coeff_e>0.0</coeff_e>
+  <crop_image>FALSE</crop_image>
+  <scale>1000.0</scale>
+</Radial_Distortion>
+<RGB_Filter>
+  <channel>1</channel>
+  <hue_value>40</hue_value>
+  <hysteresis>0</hysteresis>
+  <min_value>200</min_value>
+  <result_type>1</result_type>
+</RGB_Filter>
+<Blob_Filter>
+  <create_blob_array_variable>FALSE</create_blob_array_variable>
+  <filters>
+    <tab>
+      <filter>
+        <count_threshold>0</count_threshold>
+        <create_array>0</create_array>
+        <filter_id>8</filter_id>
+        <invert_count>0</invert_count>
+        <invert_threshold>0</invert_threshold>
+        <minimum_size>100</minimum_size>
+        <weight_threshold>0</weight_threshold>
+      </filter>
+    </tab>
+    <tab:2/>
+    <tab:3/>
+    <tab:4/>
+    <tab:5/>
+    <tab:6/>
+  </filters>
+  <largest_is_background>FALSE</largest_is_background>
+  <show_weights>FALSE</show_weights>
+  <sort_array_on_x>FALSE</sort_array_on_x>
+  <sort_array_on_y>FALSE</sort_array_on_y>
+</Blob_Filter>
+<Close>
+  <close_borders>FALSE</close_borders>
+  <dilate_count>3</dilate_count>
+  <erode_count>3</erode_count>
+  <kernal_shape>4</kernal_shape>
+  <restrict_dilation>FALSE</restrict_dilation>
+  <symmetrical>TRUE</symmetrical>
+</Close>
+<Blob_Replace>
+  <color_index>5</color_index>
+  <fill_shape>FALSE</fill_shape>
+  <order_array_on_x>FALSE</order_array_on_x>
+  <order_array_on_y>FALSE</order_array_on_y>
+  <shape_index>13</shape_index>
+  <thickness>1</thickness>
+</Blob_Replace>
+<Blob_Size>
+  <limit>2</limit>
+  <mask>FALSE</mask>
+  <max_area>0</max_area>
+  <min_area>5</min_area>
+  <threshold>5</threshold>
+  <treat_as_color_image>FALSE</treat_as_color_image>
+</Blob_Size>
+<VBScript_Program>
+  <script>list = GetArrayVariable("MEP_COORDINATES")
+
+if ubound(list)&gt;0 then
+	if ubound(list)&gt;8 then
+		SetVariable "width", list(8)-list(10)
+		SetVariable "height", list(11)-list(15)
+	end if
+	if ubound(list)&lt;8 then
+		SetVariable "width", list(0)-list(2)
+		SetVariable "height", list(3)-list(7)
+	end if
+end if
+
+SetVariable "hot", false
+if GetVariable("width")&gt;GetVariable("height") then
+	SetVariable "hot", true
+end if</script>
+  <source_mode>gui</source_mode>
+  <tab_size_index>4</tab_size_index>
+</VBScript_Program>
+<Math>
+  <all_channels>TRUE</all_channels>
+  <bias>0</bias>
+  <divisor>1</divisor>
+  <function>5</function>
+  <image1>Source</image1>
+  <image2>Current</image2>
+</Math>
+<Display_Variables>
+  <border_color>red</border_color>
+  <dim_background>TRUE</dim_background>
+  <display_as_annotation>FALSE</display_as_annotation>
+  <display_value_only>FALSE</display_value_only>
+  <font_color>white</font_color>
+  <font_size>Normal (10pt)</font_size>
+  <northwest>hot
+</northwest>
+  <west>height
+width
+</west>
+</Display_Variables>
+<NetworkTables>
+  <delay>100</delay>
+  <filter_type_index>0</filter_type_index>
+  <hostname>10.7.6.2</hostname>
+  <port>1735</port>
+  <prefix>/SmartDashboard/</prefix>
+  <variables_to_send>hot</variables_to_send>
+  <variable_type_index>0</variable_type_index>
+</NetworkTables>

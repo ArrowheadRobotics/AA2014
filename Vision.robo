@@ -42,6 +42,14 @@
   <min_threshold>0</min_threshold>
   <result_type>1</result_type>
 </Adaptive_Threshold>
+<Blob_Replace>
+  <color_index>6</color_index>
+  <fill_shape>FALSE</fill_shape>
+  <order_array_on_x>FALSE</order_array_on_x>
+  <order_array_on_y>FALSE</order_array_on_y>
+  <shape_index>13</shape_index>
+  <thickness>1</thickness>
+</Blob_Replace>
 <Blob_Filter>
   <create_blob_array_variable>FALSE</create_blob_array_variable>
   <filters>
@@ -64,6 +72,14 @@
         <ratio>2.85000</ratio>
         <weight_threshold>0</weight_threshold>
       </filter:2>
+      <filter:3>
+        <count_threshold>0</count_threshold>
+        <create_array>0</create_array>
+        <filter_id>21</filter_id>
+        <invert_count>0</invert_count>
+        <invert_threshold>0</invert_threshold>
+        <weight_threshold>0</weight_threshold>
+      </filter:3>
     </tab>
     <tab:2/>
     <tab:3/>
@@ -76,16 +92,19 @@
   <sort_array_on_x>FALSE</sort_array_on_x>
   <sort_array_on_y>FALSE</sort_array_on_y>
 </Blob_Filter>
-<Blob_Replace>
-  <color_index>6</color_index>
-  <fill_shape>TRUE</fill_shape>
-  <order_array_on_x>FALSE</order_array_on_x>
-  <order_array_on_y>FALSE</order_array_on_y>
-  <shape_index>12</shape_index>
-  <thickness>1</thickness>
-</Blob_Replace>
+<Blob_Size>
+  <limit>1</limit>
+  <mask>FALSE</mask>
+  <max_area>0</max_area>
+  <min_area>5</min_area>
+  <threshold>5</threshold>
+  <treat_as_color_image>FALSE</treat_as_color_image>
+</Blob_Size>
 <VBScript_Program>
-  <script>list = GetArrayVariable("BFR_COORDINATES")
+  <script>On Error Resume Next
+
+'list = GetArrayVariable("BFR_COORDINATES")
+list = GetArrayVariable("MEP_COORDINATES")
 if isArray(list) then
   if ubound(list) &gt; 0 then
 
@@ -95,52 +114,109 @@ if isArray(list) then
     ' calibrated for an Axis camera
     imageHeight = GetVariable("IMAGE_HEIGHT")
     cameraFieldOfView = 47.5
-    ' specify the known height of the target (12 inches)
-    targetHeight = 12.0
+    targetHeight = 18.0
 
-    ' grab list of coordinates from blob_replace
-    ' note the array is sorted by previous module in a specific order
-    righty = list(1)
-    rightyy = list(7)
-    lefty = list(3)
-    leftyy = list(5)
+    for i = 0 to ubound(list) step 8
+			minx = 1000
+			maxx = 0
+			miny = 1000
+			maxy=0
+			
+			for j=0 to 8 step 2
+				if list(i+j+1) &gt; maxx then
+					maxx = list(i+j+1)
+				end if
+				if list(i+j+1) &lt; minx then
+					minx = list(i+j+1)
+				end if
+
+				if list(i+j+2) &gt; maxy then
+					maxy = list(i+j+2)
+				end if
+				if list(i+j+2) &lt; miny then
+					miny = list(i+j+2)
+				end if
+			next
+    SetVariable "maMinX", minx
+    SetVariable "maMaxX", maxx
+    SetVariable "maMinY", miny
+    SetVariable "maMaxY", maxy
+    SetVariable "mbWidth", maxx-minx
+    SetVariable "mbHeight", maxy-miny
+			
+			blobNumber = i/8 + 1
+			line = "Blob " &amp; blobNumber &amp; ": "
+			ur = Int(list(i+1)) &amp; "," &amp; Int(list(i+2))
+			ul = Int(list(i+3)) &amp; "," &amp; Int(list(i+4))
+			ll = Int(list(i+5)) &amp; "," &amp; Int(list(i+6))
+			lr = Int(list(i+7)) &amp; "," &amp; Int(list(i+8))
+    	SetVariable "mc1UpperLeft", ul
+    	SetVariable "mc2LowerLeft", ll
+    	SetVariable "mc3UpperRight", ur
+     	SetVariable "mc4LowerRight", lr
 
-    ' based on these two side lines get the center line height
-    ' the center line is used since we want to aim to the center
-    ' of the target. This also removes any perspective distortion
-    ' where the right or left size may be a couple inches closer
-    ' or further away from the camera
-    targetPixelHeight = ((lefty - leftyy) + (righty - rightyy)) / 2
+
+
+    	SetVariable "Blob" &amp; blobNumber, line
+
+    next	
+    
+  
+      ' based on these two side lines get the center line height
+      ' the center line is used since we want to aim to the center
+      ' of the target. This also removes any perspective distortion
+      ' where the right or left size may be a couple inches closer
+      ' or further away from the camera
+      targetPixelHeight = targetPixelHeight + _
+        ((lefty - leftyy) + (righty - rightyy)) / 2
+
+      targetSamples = targetSamples + 1
+
+    'next
+
+    targetPixelHeight = targetPixelHeight / targetSamples
 
     ' we can use a known distance to determine FOV if we don't know it
     ' measuredDistance = 10.0*12.0
-    ' write "Calculated FOV " _
-    '   (((atan((((targetHeight*imageHeight)/targetPixelHeight)/2) _
+    ' write "Calculated FOV " &amp; _
+    '   (((atan((((targetHeight*imageHeight)/targetPixelHeight)/2)_
     '   /measuredDistance)*2.0)*180.0)/3.14159) &amp; vbCRLF
 
     ' determine distance in inches
-    totalDistance = (((targetHeight*imageHeight)/targetPixelHeight)/2)/ _
+    totalDistance = (((targetHeight*imageHeight)/targetPixelHeight)/2)/_
       tan(((cameraFieldOfView*3.14159)/180.0)/2.0)
 
-    SetVariable "Distance", CInt((totalDistance*100)/12)/100
+    'SetVariable "Distance", CInt((totalDistance*100)/12)/100
 
   end if
-end if
-
-Dim fi
-Dim fso
-set fso = CreateObject("Scripting.FileSystemObject")
-set fi = fso.OpenTextFile("c:\Temp\test.txt",8, true)
-if err.number = 0 then
-	fi.writeLine GetVariable("cog_x") &amp; ":" &amp; _
-		GetVariable("cog_y")
-	fi.close
-end if
-set fi=nothing
-set fso=nothing</script>
+end if</script>
   <source_mode>gui</source_mode>
   <tab_size_index>1</tab_size_index>
 </VBScript_Program>
+<Point_Location>
+  <color_index>5</color_index>
+  <display_as_annotation>TRUE</display_as_annotation>
+  <furthest_xy>FALSE</furthest_xy>
+  <highest_leftmost>FALSE</highest_leftmost>
+  <highest_middle>FALSE</highest_middle>
+  <highest_rightmost>FALSE</highest_rightmost>
+  <leftmost_highest>FALSE</leftmost_highest>
+  <leftmost_lowest>FALSE</leftmost_lowest>
+  <leftmost_middle>FALSE</leftmost_middle>
+  <lowest_leftmost>FALSE</lowest_leftmost>
+  <lowest_middle>FALSE</lowest_middle>
+  <lowest_rightmost>FALSE</lowest_rightmost>
+  <nearest_xy>FALSE</nearest_xy>
+  <northeast>FALSE</northeast>
+  <northwest>FALSE</northwest>
+  <rightmost_highest>TRUE</rightmost_highest>
+  <rightmost_lowest>TRUE</rightmost_lowest>
+  <rightmost_middle>FALSE</rightmost_middle>
+  <shape_index>2</shape_index>
+  <size_index>2</size_index>
+  <southeast>FALSE</southeast>
+  <southwest>FALSE</southwest>
+</Point_Location>
 <Math>
   <all_channels>TRUE</all_channels>
   <bias>0</bias>
@@ -149,6 +225,38 @@ set fso=nothing</script>
   <image1>Source</image1>
   <image2>Current</image2>
 </Math>
+<Display_Variables>
+  <border_color>red</border_color>
+  <center>BFR9
+BFR10
+</center>
+  <dim_background>TRUE</dim_background>
+  <display_as_annotation>FALSE</display_as_annotation>
+  <display_value_only>FALSE</display_value_only>
+  <east>BFR11
+BFR12
+</east>
+  <font_color>white</font_color>
+  <font_size>Normal (10pt)</font_size>
+  <north>BFR3
+BFR4
+</north>
+  <northeast>BFR5
+BFR6
+</northeast>
+  <northwest>BFR1
+BFR2
+</northwest>
+  <south>BFR15
+BFR16
+</south>
+  <southwest>BFR13
+BFR14
+</southwest>
+  <west>BFR7
+BFR8
+</west>
+</Display_Variables>
 <Set_Variable>
   <set_1_array>FALSE</set_1_array>
   <set_1_once>FALSE</set_1_once>
@@ -161,3 +269,14 @@ set fso=nothing</script>
   <value_1>[BFR_COORDINATES]</value_1>
   <variable_1>/SmartDashboard/BFR_COORDINATES</variable_1>
 </Set_Variable>
+<NetworkTables>
+  <delay>100</delay>
+  <filter_type_index>0</filter_type_index>
+  <hostname>10.7.6.2</hostname>
+  <port>1735</port>
+  <prefix>/SmartDashboard/</prefix>
+  <variables_to_send>/SmartDashboard/BFR_COORDINATES
+BFR_COORDINATES
+Distance</variables_to_send>
+  <variable_type_index>0</variable_type_index>
+</NetworkTables>
