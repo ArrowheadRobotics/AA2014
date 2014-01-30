@@ -12,8 +12,6 @@
 #include "ClawDown.h"
 #include "../Subsystems/Claw.h"
 
-bool low = false;
-
 ClawDown::ClawDown() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -28,15 +26,7 @@ void ClawDown::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ClawDown::Execute() {
-	if(!low) { //if claw is not too low
-		RobotMap::clawlifter->Set(-.2); //move down
-	}
-	else { //if it is
-		RobotMap::clawlifter->Set(0); //stop
-	}
-	if(Robot::claw->pot1->GetValue() <= 0) { //if the claw is at bottom
-		low = true; //claw is too low
-	}
+	RobotMap::clawlifter->Set(-.2);
 }
 
 // Make this return true when this Command no longer needs to run execute()
