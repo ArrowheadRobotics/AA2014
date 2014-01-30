@@ -12,7 +12,7 @@
 #include "ClawTop.h"
 #include "../Subsystems/Claw.h"
 
-float top = 20;
+float top = 20; //set top position
 
 ClawTop::ClawTop() {
 	// Use requires() here to declare subsystem dependencies
@@ -23,23 +23,23 @@ ClawTop::ClawTop() {
 
 // Called just before this Command runs the first time
 void ClawTop::Initialize() {
-	Robot::claw->pot1->GetValue();
+	Robot::claw->pot1->GetValue(); //get pot value
 }
 
 // Called repeatedly when this Command is scheduled to run
 void ClawTop::Execute() {
-	float topat = Robot::claw->pot1->GetValue();
-	float topspd = 1-topat/top;
-	if(topspd >.7){
-		topspd = .7;
+	float topat = Robot::claw->pot1->GetValue(); //assign variable to current position
+	float topspd = 1-topat/top; //determine speed based on position relative to top setpoint
+	if(topspd >.7){ //if the speed is faster than .7
+		topspd = .7; //keep it at .7
 	}
-	if (topspd <.1 && topspd !=0) {
-		topspd = .1;
+	if (topspd <.1 && topspd !=0) { //if the speed is lower than .1 but not 0
+		topspd = .1; //keep it at .1
 	}
-	if(topat>20) {
-		topspd = 0;
+	if(topat>20) { //if the position is over 20
+		topspd = 0; //stop
 	}
-	RobotMap::clawlifter->Set(topspd);
+	RobotMap::clawlifter->Set(topspd); //set speed of the claw as determined above
 }
 
 // Make this return true when this Command no longer needs to run execute()

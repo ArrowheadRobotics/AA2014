@@ -22,12 +22,12 @@ SwitchShift::SwitchShift() {
 
 // Called just before this Command runs the first time
 void SwitchShift::Initialize() {
-	printf("Gear changed\n");
+	printf("Gear changed\n"); //show that gear has changed (debugging)
 }
 
 // Called repeatedly when this Command is scheduled to run
 void SwitchShift::Execute() {
-	RobotMap::driveswitchSol1->Set(true);
+	RobotMap::driveswitchSol1->Set(true); //activate the solenoid (switch gears)
 	RobotMap::driveswitchSol2->Set(false);
 }
 
@@ -37,7 +37,7 @@ bool SwitchShift::IsFinished() {
 }
 
 // Called once after isFinished returns true
-void SwitchShift::End() {
+void SwitchShift::End() { //contents should not be needed (added as fail-safe)
 	RobotMap::driveswitchSol1->Set(false);
 	RobotMap::driveswitchSol2->Set(true);
 	printf("Gear reset\n");
@@ -46,7 +46,7 @@ void SwitchShift::End() {
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void SwitchShift::Interrupted() {
-	RobotMap::driveswitchSol1->Set(false);
+	RobotMap::driveswitchSol1->Set(false); //deactive the solenoid (change gears back)
 	RobotMap::driveswitchSol2->Set(true);
-	printf("Gear reset\n");
+	printf("Gear reset\n"); //show that the gear has been reset
 }

@@ -27,7 +27,7 @@ void RollerStop::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void RollerStop::Execute() {
-	Robot::arm->roll1->Set(Relay::kOff);
+	Robot::arm->roll1->Set(Relay::kOff); //stop the spike
 }
 
 // Make this return true when this Command no longer needs to run execute()

@@ -20,7 +20,8 @@ ArmLift::ArmLift() {
 
 // Called just before this Command runs the first time
 void ArmLift::Initialize() {
-	Robot::arm->lifter1->Set(.1);
+	RobotMap::armSol1->Set(true); //turn on sol to raise arm
+	RobotMap::armSol2->Set(false);
 }
 
 // Called repeatedly when this Command is scheduled to run

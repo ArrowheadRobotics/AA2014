@@ -20,7 +20,7 @@ Fire::Fire() {
 
 // Called just before this Command runs the first time
 void Fire::Initialize() {
-	Robot::claw->fire();
+	Robot::claw->fire(); //run fire command
 }
 
 // Called repeatedly when this Command is scheduled to run

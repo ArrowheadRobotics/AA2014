@@ -27,7 +27,7 @@ void TankDrive::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void TankDrive::Execute() {
-	Robot::drive->M_Drive(Robot::oi->getjoy1(), Robot::oi->getjoy2());
+	Robot::drive->M_Drive(Robot::oi->getjoy1(), Robot::oi->getjoy2()); //run the M_Drive command
 }
 
 // Make this return true when this Command no longer needs to run execute()

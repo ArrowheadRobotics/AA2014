@@ -28,7 +28,7 @@ void RollerForward::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void RollerForward::Execute() {
-	Robot::arm->roll1->Set(Relay::kForward);
+	Robot::arm->roll1->Set(Relay::kForward); //set the spike to run forward
 }
 
 // Make this return true when this Command no longer needs to run execute()

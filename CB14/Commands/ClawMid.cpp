@@ -12,7 +12,7 @@
 #include "ClawMid.h"
 #include "../Subsystems/Claw.h"
 
-float mid = 10;
+float mid = 10; //set mid position
 
 ClawMid::ClawMid() {
 	// Use requires() here to declare subsystem dependencies
@@ -23,23 +23,23 @@ ClawMid::ClawMid() {
 
 // Called just before this Command runs the first time
 void ClawMid::Initialize() {
-	Robot::claw->pot1->GetValue();
+	Robot::claw->pot1->GetValue(); //get pot value
 }
 
 // Called repeatedly when this Command is scheduled to run
 void ClawMid::Execute() {
-	float midat = Robot::claw->pot1->GetValue();
-	float midspd = 1-midat/mid;
-	if(midspd >.7){
-		midspd = .7;
+	float midat = Robot::claw->pot1->GetValue(); //assign value to a variable to avoid writing everything
+	float midspd = 1-midat/mid; //determine speed based on position relative to the mid setpoint
+	if(midspd >.7){ //if the speed is over .7
+		midspd = .7; //keep it at .7
 	}
-	if (midspd <.1 && midspd !=0) {
-		midspd = .1;
+	if (midspd <.1 && midspd !=0) { //if the speed is under .1 but not 0
+		midspd = .1; //keep it at .1
 	}
-	if(midat>10) {
-		midspd = 0;
+	if(midat>10) { //if the position is over 10
+		midspd = 0; //stop
 	}
-	RobotMap::clawlifter->Set(midspd);
+	RobotMap::clawlifter->Set(midspd); //set the speed of the claw to value determined above
 }
 
 // Make this return true when this Command no longer needs to run execute()

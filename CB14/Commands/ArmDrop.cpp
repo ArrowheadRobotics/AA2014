@@ -20,12 +20,13 @@ ArmDrop::ArmDrop() {
 
 // Called just before this Command runs the first time
 void ArmDrop::Initialize() {
-	
+	RobotMap::armSol1->Set(false); //turns off sol to lower arm
+	RobotMap::armSol2->Set(true);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void ArmDrop::Execute() {
-	Robot::arm->lifter1->Set(-.1);
+	
 }
 
 // Make this return true when this Command no longer needs to run execute()

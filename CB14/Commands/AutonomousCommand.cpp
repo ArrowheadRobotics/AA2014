@@ -24,24 +24,20 @@ AutonomousCommand::AutonomousCommand() {
 
 // Called just before this Command runs the first time
 void AutonomousCommand::Initialize() {
-	t.Start();
-	t.Reset();
-	RobotMap::driveenLeft->Reset();
-	RobotMap::driveenRight->Reset();
-	RobotMap::drivebackLeftDrive->Set(.4);
-	RobotMap::drivebackRightDrive->Set(-.4);
-	RobotMap::drivefrontLeftDrive->Set(.4);
-	RobotMap::drivefrontRightDrive->Set(-.4);
+	t.Start(); //starts timer
+	t.Reset(); //resets timer to zero
+	RobotMap::driveenLeft->Reset(); //resets left encoder
+	RobotMap::driveenRight->Reset(); //resets right encoder
+	RobotMap::driveLeftDrive->Set(.4); //turns right
+	RobotMap::driveRightDrive->Set(-.4); //turns right faster
 	
-	if(RobotMap::driveenLeft->Get() < -4000 && RobotMap::driveenRight->Get() > 4000) {
-		RobotMap::drivebackLeftDrive->Set(0);
-		RobotMap::drivebackRightDrive->Set(0);
-		RobotMap::drivefrontLeftDrive->Set(0);
-		RobotMap::drivefrontRightDrive->Set(0);
-		while(hot == false || t.Get()>5.0f) {
+	if(RobotMap::driveenLeft->Get() < -4000 && RobotMap::driveenRight->Get() > 4000) { //if the robot has turned enough
+		RobotMap::driveLeftDrive->Set(0); //stop turning
+		RobotMap::driveRightDrive->Set(0); //stop turning
+		while(hot == false || t.Get()>5.0f) { //wait for hot to be true or until five seconds pass
 			
 		}
-		Robot::claw->fire();
+		Robot::claw->fire(); //execute fire command
 			
 	}
 }

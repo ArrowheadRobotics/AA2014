@@ -28,7 +28,7 @@ void RollerBackwards::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void RollerBackwards::Execute() {
-	Robot::arm->roll1->Set(Relay::kReverse);
+	Robot::arm->roll1->Set(Relay::kReverse); //set the spike to run in reverse
 }
 
 // Make this return true when this Command no longer needs to run execute()

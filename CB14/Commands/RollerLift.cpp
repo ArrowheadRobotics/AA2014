@@ -26,7 +26,7 @@ void RollerLift::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void RollerLift::Execute() {
-	RobotMap::armlifter1->Set(.5);
+	//RobotMap::armlifter1->Set(.5);
 }
 
 // Make this return true when this Command no longer needs to run execute()

@@ -23,14 +23,14 @@ MoveClaw::MoveClaw() {
 
 // Called just before this Command runs the first time
 void MoveClaw::Initialize() {
-	printf("MoveClawStarted");
+	printf("MoveClawStarted"); //show that claw should be moving
 }
 
 // Called repeatedly when this Command is scheduled to run
 void MoveClaw::Execute() {
 	printf(" ");
-	Robot::claw->pot1->GetValue();
-	printf("Potentiometer Value: %d \n", Robot::claw->pot1->GetValue());
+	Robot::claw->pot1->GetValue(); //get pot value
+	printf("Potentiometer Value: %d \n", Robot::claw->pot1->GetValue()); //print out pot value
 }
 
 //Pot goes from 0 to 965
