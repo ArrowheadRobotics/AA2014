@@ -8,6 +8,7 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 
+bool low = false;
 
 #include "ClawDown.h"
 #include "../Subsystems/Claw.h"
@@ -26,7 +27,15 @@ void ClawDown::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ClawDown::Execute() {
-	RobotMap::clawlifter->Set(-.2);
+	if(!low) { //if the claw is not too low
+		RobotMap::clawlifter->Set(-0.2); //move down
+	}
+	if(Robot::claw->pot1->GetValue() < 0) { //if the claw is or below 0
+		low = true; //it is too low
+	}
+	else { //if it isn't below zero
+		low = false; //it isn't too low
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()

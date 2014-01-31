@@ -40,7 +40,8 @@ void Claw::InitDefaultCommand() {
 
 void Claw::fire()
 {
-	Robot::arm->lifter1->Set(.1); 				//Lifts the Arm up
+	RobotMap::armSol1->Set(true);
+	RobotMap::armSol2->Set(false); //Lifts the Arm up
 	Robot::claw->triggerSol1->Set(true);		//Pull in Trigger
 	Robot::claw->triggerSol2->Set(false);		//Pull in Trigger
 	Robot::claw->shooterSol1->Set(false);		//No Pressure to Shooter Solenoids

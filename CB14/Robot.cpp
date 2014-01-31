@@ -61,12 +61,9 @@ void Robot::TeleopInit() {
 	// teleop starts running. If you want the autonomous to 
 	// continue until interrupted by another command, remove
 	// this line or comment it out.
-<<<<<<< HEAD
 	autonomousCommand->Cancel();
 	printf("Testing\n");
-=======
 	autonomousCommand->Cancel(); //end autonomous at start of teleop period
->>>>>>> 023c53737976d8a40601125ed4e920140354c3ee
 }
 	
 void Robot::TeleopPeriodic() {
@@ -83,7 +80,7 @@ void Robot::TeleopPeriodic() {
 		printf("Array size = %d\n",Robot::coords->size());
 		
 	printf("b\n");
-	printf("Distance = %f\n",Robot::coords[1]);
+	printf("Distance = %d\n",Robot::coords[1]);
 	printf("a");
 }
 

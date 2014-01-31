@@ -10,6 +10,7 @@
 
 
 #include "ClawUp.h"
+bool high = false;
 
 ClawUp::ClawUp() {
 	// Use requires() here to declare subsystem dependencies
@@ -25,7 +26,15 @@ void ClawUp::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ClawUp::Execute() {
-	RobotMap::clawlifter->Set(.2);
+	if(!high) { //if the claw is not too high
+		RobotMap::clawlifter->Set(.2); //move up
+	}
+	if(Robot::claw->pot1->GetValue() > 20) { //if the claw is above 20
+		high = true; //it is too high
+	}
+	else { //otherwise
+		high = false; //it isn't
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
