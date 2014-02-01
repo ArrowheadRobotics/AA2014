@@ -27,7 +27,7 @@ void ClawUp::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void ClawUp::Execute() {
 	if(!high) { //if the claw is not too high
-		RobotMap::clawlifter->Set(.2); //move up
+		Robot::claw->lifter->Set(.2); //move up
 	}
 	if(Robot::claw->pot1->GetValue() > 20) { //if the claw is above 20
 		high = true; //it is too high

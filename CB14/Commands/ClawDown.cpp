@@ -28,7 +28,7 @@ void ClawDown::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void ClawDown::Execute() {
 	if(!low) { //if the claw is not too low
-		RobotMap::clawlifter->Set(-0.2); //move down
+		Robot::claw->lifter->Set(-0.2); //move down
 	}
 	if(Robot::claw->pot1->GetValue() < 0) { //if the claw is or below 0
 		low = true; //it is too low

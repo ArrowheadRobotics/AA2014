@@ -38,7 +38,7 @@ public:
 	static Relay* armrollerrelay1;
 	static Compressor* compressor;
 	static AnalogChannel* clawPot1;
-	static SpeedController* clawlifter;
+	static SpeedController* clawLifter;
 	static Solenoid* armSol1;
 	static Solenoid* armSol2;
 

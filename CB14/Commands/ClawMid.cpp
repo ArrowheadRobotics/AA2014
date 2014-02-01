@@ -39,7 +39,7 @@ void ClawMid::Execute() {
 	if(midat>10) {
 		midspd = 0;
 	}
-	RobotMap::clawlifter->Set(midspd);
+	Robot::claw->lifter->Set(midspd);
 }
 
 // Make this return true when this Command no longer needs to run execute()

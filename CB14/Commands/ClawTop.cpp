@@ -39,7 +39,7 @@ void ClawTop::Execute() {
 	if(topat>20) {
 		topspd = 0;
 	}
-	RobotMap::clawlifter->Set(topspd);
+	Robot::claw->lifter->Set(topspd);
 }
 
 // Make this return true when this Command no longer needs to run execute()
