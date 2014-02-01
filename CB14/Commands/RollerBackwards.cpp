@@ -23,17 +23,17 @@ RollerBackwards::RollerBackwards() {
 
 // Called just before this Command runs the first time
 void RollerBackwards::Initialize() {
-	
+	Robot::arm->roll1->Set(Relay::kReverse); //set the spike to run in reverse
 }
 
 // Called repeatedly when this Command is scheduled to run
 void RollerBackwards::Execute() {
-	Robot::arm->roll1->Set(Relay::kReverse); //set the spike to run in reverse
+	
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool RollerBackwards::IsFinished() {
-	return false;
+	return true;
 }
 
 // Called once after isFinished returns true

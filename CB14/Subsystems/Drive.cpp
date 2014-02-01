@@ -40,5 +40,7 @@ void Drive::InitDefaultCommand() {
 // here. Call these from Commands.
 
 void Drive::M_Drive(Joystick* joy1, Joystick* joy2){ //activate tankdrive
+	printf("function1");
 	driveTrain->TankDrive(joy1, joy2);
+	printf("function2");
 }

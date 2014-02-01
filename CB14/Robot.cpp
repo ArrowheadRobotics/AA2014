@@ -67,21 +67,21 @@ void Robot::TeleopInit() {
 }
 	
 void Robot::TeleopPeriodic() {
-	printf("ABABABABABABABABAC");
+//	printf("ABABABABABABABABAC");
 	if (autonomousCommand != NULL)
 		Scheduler::GetInstance()->Run();
-	printf("xyzabc\n");
-	string val = "BFR_COORDINATES";
-	printf("a\n");
-	Robot::table->RetrieveValue(val, *Robot::coords);
-	if (coords == NULL)
-		printf("null pointer\n");
-	else
-		printf("Array size = %d\n",Robot::coords->size());
-		
-	printf("b\n");
-	printf("Distance = %d\n",Robot::coords[1]);
-	printf("a");
+//	printf("xyzabc\n");
+//	string val = "BFR_COORDINATES";
+//	printf("a\n");
+//	Robot::table->RetrieveValue(val, *Robot::coords);
+//	if (coords == NULL)
+//		printf("null pointer\n");
+//	else
+//		printf("Array size = %d\n",Robot::coords->size());
+//		
+//	printf("b\n");
+//	printf("Distance = %d\n",Robot::coords[1]);
+//	printf("a");
 }
 
 void Robot::TestPeriodic() {

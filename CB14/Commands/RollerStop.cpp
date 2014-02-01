@@ -22,17 +22,17 @@ RollerStop::RollerStop() {
 
 // Called just before this Command runs the first time
 void RollerStop::Initialize() {
-	
+	Robot::arm->roll1->Set(Relay::kOff); //stop the spike
 }
 
 // Called repeatedly when this Command is scheduled to run
 void RollerStop::Execute() {
-	Robot::arm->roll1->Set(Relay::kOff); //stop the spike
+	
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool RollerStop::IsFinished() {
-	return false;
+	return true;
 }
 
 // Called once after isFinished returns true
