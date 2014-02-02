@@ -11,6 +11,7 @@
 #include "AutonomousCommand.h"
 #include "../RobotMap.h"
 #include "Fire.h"
+#include "../Constants.h"
 
 Timer t;
 
@@ -27,22 +28,22 @@ void AutonomousCommand::Initialize() {
 	t.Reset(); //resets timer to zero
 	RobotMap::driveenLeft->Reset(); //resets left encoder
 	RobotMap::driveenRight->Reset(); //resets right encoder
-	RobotMap::driveLeftDrive->Set(.4); //turns right
-	RobotMap::driveRightDrive->Set(-.4); //turns right faster
+	RobotMap::driveLeftDrive->Set(FORWARDSPEED); //turns right
+	RobotMap::driveRightDrive->Set(FORWARDSPEED*-1); //turns right faster
 	
-	while(RobotMap::driveenLeft->Get() > -4000 || RobotMap::driveenRight->Get() < 4000) 
+	while(RobotMap::driveenLeft->Get() > ENCODERDISTANCE*-1 || RobotMap::driveenRight->Get() < ENCODERDISTANCE) 
 	{
 		
 	} //if the robot has turned enough
-	RobotMap::driveLeftDrive->Set(0); //stop turning
-	RobotMap::driveRightDrive->Set(0); //stop turning
-	Robot::claw->lifter->Set(-0.3f);
-	while(Robot::claw->pot1->GetValue()>20)
+	RobotMap::driveLeftDrive->Set(STOPSPEED); //stop turning
+	RobotMap::driveRightDrive->Set(STOPSPEED); //stop turning
+	Robot::claw->lifter->Set(DOWNSPEED);
+	while(Robot::claw->pot1->GetValue()>FIRINGPOINT)
 	{
 		
 	}
-	Robot::claw->lifter->Set(0.0f);
-	while(Robot::Hot == false && t.Get()<5.0f) { //wait for hot to be true or until five seconds pass
+	Robot::claw->lifter->Set(STOPSPEED);
+	while(Robot::Hot == false && t.Get()<HALFAUTO) { //wait for hot to be true or until five seconds pass
 		
 	}
 	Robot::claw->fire(); //execute fire command

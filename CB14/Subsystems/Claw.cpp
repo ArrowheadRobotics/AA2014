@@ -14,6 +14,7 @@
 #include "Claw.h"
 #include "../Robotmap.h"
 #include "../Robot.h"
+#include "../Constants.h"
 
 Timer z;
 
@@ -49,20 +50,14 @@ void Claw::fire()
 	RobotMap::armSol1->Set(true);
 	RobotMap::armSol2->Set(false); //Lifts the Arm up
 	printf("armup");
-	while(z.Get()<0.8f)
+	while(z.Get()<ARMTOTRIGGER)
 	{
 			
 	}
 	Robot::claw->triggerSol1->Set(false);		//Pull in Trigger
 	Robot::claw->triggerSol2->Set(true);		//Pull in Trigger
 	printf("triggerdown");
-	z.Reset();
-	while(z.Get()<0.5f)
-	{
-		
-	}	
-	z.Reset();
-	while(z.Get()<1.2f)
+	while(z.Get()<TRIGGERTORESET)
 	{
 			
 	}
@@ -75,7 +70,6 @@ void Claw::fire()
 	{
 		
 	}
-	printf("exit");
 	Robot::claw->triggerSol1->Set(true);		
 	Robot::claw->triggerSol2->Set(false);
 	Robot::claw->shooterSol1->Set(true);

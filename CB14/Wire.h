@@ -17,6 +17,7 @@
 #define moduleONE 1
 
 //SOLENOID OBJECTS
+//DO NOT CHANGE THESE!
 #define portSHIFTHIGH 1
 #define portSHIFTLOW 2
 #define portSHOOTTRIGGERIN 5
