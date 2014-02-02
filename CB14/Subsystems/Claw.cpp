@@ -62,7 +62,7 @@ void Claw::fire()
 		
 	}	
 	z.Reset();
-	while(z.Get()<1.5f)
+	while(z.Get()<1.2f)
 	{
 			
 	}

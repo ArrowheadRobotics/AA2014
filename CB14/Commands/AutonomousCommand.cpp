@@ -34,7 +34,7 @@ void AutonomousCommand::Initialize() {
 	if(RobotMap::driveenLeft->Get() < -4000 && RobotMap::driveenRight->Get() > 4000) { //if the robot has turned enough
 		RobotMap::driveLeftDrive->Set(0); //stop turning
 		RobotMap::driveRightDrive->Set(0); //stop turning
-		while(hot == false || t.Get()>5.0f) { //wait for hot to be true or until five seconds pass
+		while(Robot::Hot == false || t.Get()>5.0f) { //wait for hot to be true or until five seconds pass
 			
 		}
 		Robot::claw->fire(); //execute fire command
