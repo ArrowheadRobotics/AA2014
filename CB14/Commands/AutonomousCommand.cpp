@@ -42,7 +42,7 @@ void AutonomousCommand::Initialize() {
 		
 	}
 	Robot::claw->lifter->Set(0.0f);
-	while(Robot::Hot == false || t.Get()>5.0f) { //wait for hot to be true or until five seconds pass
+	while(Robot::Hot == false && t.Get()<5.0f) { //wait for hot to be true or until five seconds pass
 		
 	}
 	Robot::claw->fire(); //execute fire command
