@@ -11,8 +11,7 @@
 
 #include "ClawTop.h"
 #include "../Subsystems/Claw.h"
-
-float top = 20;
+#include "../Constants.h"
 
 ClawTop::ClawTop() {
 	// Use requires() here to declare subsystem dependencies
@@ -28,18 +27,7 @@ void ClawTop::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ClawTop::Execute() {
-	float topat = Robot::claw->pot1->GetValue();
-	float topspd = 1-topat/top;
-	if(topspd >.7){
-		topspd = .7;
-	}
-	if (topspd <.1 && topspd !=0) {
-		topspd = .1;
-	}
-	if(topat>20) {
-		topspd = 0;
-	}
-	Robot::claw->lifter->Set(topspd);
+	//todo check if this is needed-need to delete commands or call them in oi
 }
 
 // Make this return true when this Command no longer needs to run execute()

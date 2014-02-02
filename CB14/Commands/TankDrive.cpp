@@ -28,10 +28,7 @@ void TankDrive::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void TankDrive::Execute() {
-	//printf("command1");
 	Robot::drive->M_Drive(Robot::oi->getjoy1(), Robot::oi->getjoy2()); //run the M_Drive command
-	//printf("command2	:");
-	printf("%d\n",Robot::claw->ballSwitch->Get());
 }
 
 // Make this return true when this Command no longer needs to run execute()

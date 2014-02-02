@@ -17,6 +17,7 @@
 #define STOPSPEED 0.0f
 #define POTTOP 20
 #define POTBOTTOM 0
+#define POTMIDDLE 10
 
 
 //Timing

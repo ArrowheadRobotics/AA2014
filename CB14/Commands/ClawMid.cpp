@@ -11,8 +11,7 @@
 
 #include "ClawMid.h"
 #include "../Subsystems/Claw.h"
-
-float mid = 10;
+#include "../Constants.h"
 
 ClawMid::ClawMid() {
 	// Use requires() here to declare subsystem dependencies
@@ -23,23 +22,11 @@ ClawMid::ClawMid() {
 
 // Called just before this Command runs the first time
 void ClawMid::Initialize() {
-	Robot::claw->pot1->GetValue();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void ClawMid::Execute() {
-	float midat = Robot::claw->pot1->GetValue();
-	float midspd = 1-midat/mid;
-	if(midspd >.7){
-		midspd = .7;
-	}
-	if (midspd <.1 && midspd !=0) {
-		midspd = .1;
-	}
-	if(midat>10) {
-		midspd = 0;
-	}
-	Robot::claw->lifter->Set(midspd);
+	//todo check if this is needed
 }
 
 // Make this return true when this Command no longer needs to run execute()
