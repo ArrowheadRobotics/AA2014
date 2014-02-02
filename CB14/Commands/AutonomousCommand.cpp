@@ -12,7 +12,6 @@
 #include "../RobotMap.h"
 #include "Fire.h"
 
-bool hot = false;
 Timer t;
 
 AutonomousCommand::AutonomousCommand() {
