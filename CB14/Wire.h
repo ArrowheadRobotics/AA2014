@@ -7,11 +7,11 @@
 //PWM
 #define portLEFTDRIVE 1
 #define portRIGHTDRIVE 2
-#define portCLAWLIFT 3
+#define portCLAWLIFT 4
 
 //RELAY/
-#define portROLLER 1
-#define portCOMPRESSOR 2
+#define portROLLER 2
+#define portCOMPRESSOR 1
 
 //MODULES
 #define moduleONE 1
@@ -19,12 +19,12 @@
 //SOLENOID OBJECTS
 #define portSHIFTHIGH 1
 #define portSHIFTLOW 2
-#define portSHOOTTRIGGERIN 3
-#define portSHOOTTRIGGEROUT 4
-#define portSHOOTPUSHIN 5
-#define portSHOOTPUSHOUT 6
-#define portINTAKEARMUP 7
-#define portINTAKEARMDOWN 8
+#define portSHOOTTRIGGERIN 5
+#define portSHOOTTRIGGEROUT 6
+#define portSHOOTPUSHIN 7
+#define portSHOOTPUSHOUT 8
+#define portINTAKEARMUP 3
+#define portINTAKEARMDOWN 4
 
 //IO
 //Encoders use two ports: A and B

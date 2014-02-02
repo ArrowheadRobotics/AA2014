@@ -90,11 +90,11 @@ OI::OI() {
 	joy1Thumb3 = new JoystickButton(joy1,3);
 	joy1Thumb3->WhileHeld(new MoveClaw());
 	
-	//joyPadY = new JoystickButton(joyPad, 4);
-	//joyPadY->WhileHeld(new ClawUp());
+	joyPadY = new JoystickButton(joyPad, 6);
+	joyPadY->WhileHeld(new ClawUp());
 	
-	//joyPadA = new JoystickButton(joyPad, 5);
-	//joyPadA->WhileHeld(new ClawDown());
+	joyPadA = new JoystickButton(joyPad, 7);
+	joyPadA->WhileHeld(new ClawDown());
 	
 }
 

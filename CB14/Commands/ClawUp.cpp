@@ -26,15 +26,16 @@ void ClawUp::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ClawUp::Execute() {
-	if(!high) { //if the claw is not too high
-		Robot::claw->lifter->Set(.2); //move up
-	}
-	if(Robot::claw->pot1->GetValue() > 20) { //if the claw is above 20
-		high = true; //it is too high
-	}
-	else { //otherwise
-		high = false; //it isn't
-	}
+//	if(!high) { //if the claw is not too high
+		Robot::claw->lifter->Set(.5); //move up
+		printf("up");
+//	}
+//	if(Robot::claw->pot1->GetValue() > 20) { //if the claw is above 20
+//		high = true; //it is too high
+//	}
+//	else { //otherwise
+//		high = false; //it isn't
+//	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -44,11 +45,11 @@ bool ClawUp::IsFinished() {
 
 // Called once after isFinished returns true
 void ClawUp::End() {
-	
+	Robot::claw->lifter->Set(0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void ClawUp::Interrupted() {
-
+	Robot::claw->lifter->Set(0);
 }

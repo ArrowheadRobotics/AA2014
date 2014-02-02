@@ -27,15 +27,16 @@ void ClawDown::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ClawDown::Execute() {
-	if(!low) { //if the claw is not too low
-		Robot::claw->lifter->Set(-0.2); //move down
-	}
-	if(Robot::claw->pot1->GetValue() < 0) { //if the claw is or below 0
-		low = true; //it is too low
-	}
-	else { //if it isn't below zero
-		low = false; //it isn't too low
-	}
+//	if(!low) { //if the claw is not too low
+		Robot::claw->lifter->Set(-0.5); //move down
+		printf("down");
+//	}
+//	if(Robot::claw->pot1->GetValue() < 0) { //if the claw is or below 0
+//		low = true; //it is too low
+//	}
+//	else { //if it isn't below zero
+//		low = false; //it isn't too low
+//	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -45,11 +46,11 @@ bool ClawDown::IsFinished() {
 
 // Called once after isFinished returns true
 void ClawDown::End() {
-	
+	Robot::claw->lifter->Set(0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void ClawDown::Interrupted() {
-
+	Robot::claw->lifter->Set(0);
 }

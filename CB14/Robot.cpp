@@ -62,19 +62,18 @@ void Robot::TeleopInit() {
 	// continue until interrupted by another command, remove
 	// this line or comment it out.
 	autonomousCommand->Cancel();
-	printf("Testing\n");
+	//printf("Testing\n");
 	autonomousCommand->Cancel(); //end autonomous at start of teleop period
 }
 	
 void Robot::TeleopPeriodic() {
 	if (autonomousCommand != NULL)
 		Scheduler::GetInstance()->Run();
-
 	try
 	{
-		printf("xyzabc\n");
+		//printf("xyzabc\n");
 		string val = "BFR_COORDINATES";
-		printf("a\n");
+		//printf("a\n");
 		Robot::table->RetrieveValue(val, *Robot::coords);
 		if (coords == NULL)
 			printf("null pointer\n");

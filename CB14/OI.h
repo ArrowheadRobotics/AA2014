@@ -33,6 +33,7 @@ private:
 	JoystickButton* joy1Thumb3;
 	JoystickButton* joyPadY;
 	JoystickButton* joyPadA;
+	JoystickButton* joyPad7;
 public:
 	OI();
  
@@ -53,6 +54,7 @@ public:
 	JoystickButton* getjoythumb3();
 	JoystickButton* getjoyPadY();
 	JoystickButton* getjoyPadA();
+	
 };
 
 #endif
