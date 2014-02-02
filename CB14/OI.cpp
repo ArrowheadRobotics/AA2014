@@ -20,11 +20,9 @@
 #include "Commands/Fire.h"
 #include "Commands/RollerBackwards.h"
 #include "Commands/RollerForward.h"
-#include "Commands/RollerLift.h"
 #include "Commands/RollerStop.h"
 #include "Commands/SwitchShift.h"
 #include "Commands/TankDrive.h"
-#include "Commands/MoveClaw.h"
 #include "Commands/ClawDown.h"
 #include "Commands/ClawUp.h"
 #include "Commands/ClawMid.h"
@@ -71,7 +69,6 @@ OI::OI() {
 
 	SmartDashboard::PutData("RollerStop", new RollerStop());
 
-	SmartDashboard::PutData("RollerLift", new RollerLift());
 
 	SmartDashboard::PutData("ArmLift", new ArmLift());
 
@@ -86,9 +83,6 @@ OI::OI() {
 	
 	joy2Thumb = new JoystickButton(joy2,2);
 	//joy2Thumb->WhenPressed(new Fire());
-	
-	joy1Thumb3 = new JoystickButton(joy1,3);
-	joy1Thumb3->WhileHeld(new MoveClaw());
 	
 	joyPadY = new JoystickButton(joyPad, 6);
 	joyPadY->WhileHeld(new ClawUp());
