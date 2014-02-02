@@ -60,10 +60,7 @@ void Claw::fire()
 	while(z.Get()<0.5f)
 	{
 		
-	}
-	
-	//Robot::claw->shooterSol1->Set(false);		//No Pressure to Shooter Solenoids
-	
+	}	
 	z.Reset();
 	while(z.Get()<1.5f)
 	{
@@ -74,30 +71,15 @@ void Claw::fire()
 	Robot::claw->shooterSol1->Set(false);
 	Robot::claw->shooterSol2->Set(true);
 	z.Reset();
-	while(z.Get()<1.0f && !Robot::oi->getjoythumb1()->Get())
+	while(!Robot::claw->ballSwitch->Get() && !Robot::oi->getjoythumb1()->Get())
 	{
-		printf("%d\n",Robot::claw->ballSwitch->Get());
+		
 	}
 	printf("exit");
-	Robot::claw->triggerSol1->Set(true);		//Pull in Trigger
+	Robot::claw->triggerSol1->Set(true);		
 	Robot::claw->triggerSol2->Set(false);
 	Robot::claw->shooterSol1->Set(true);
 	Robot::claw->shooterSol2->Set(false);
-//	Robot::claw->triggerSol1->Set(true);		//Pull in Trigger
-//	Robot::claw->triggerSol2->Set(false);
-//	printf("nopressure");
-//	while(!Robot::claw->ballSwitch->Get() || !Robot::oi->getjoythumb1()->Get())
-//	{
-//		//Waiting until microswitch is hit
-//		//or until loop is exited by pressing button
-//		printf("perpetuality");
-//	}
-//	Robot::claw->triggerSol1->Set(true);		//Push out Trigger
-//	Robot::claw->triggerSol2->Set(false);		//Push out Trigger
-//	Robot::claw->shooterSol1->Set(true);		//Pressurize Shooter Solenoids
-	
-	//todo Test this Function-most likely won't work
-	
 }
 
 
