@@ -30,15 +30,22 @@ void AutonomousCommand::Initialize() {
 	RobotMap::driveLeftDrive->Set(.4); //turns right
 	RobotMap::driveRightDrive->Set(-.4); //turns right faster
 	
-	if(RobotMap::driveenLeft->Get() < -4000 && RobotMap::driveenRight->Get() > 4000) { //if the robot has turned enough
-		RobotMap::driveLeftDrive->Set(0); //stop turning
-		RobotMap::driveRightDrive->Set(0); //stop turning
-		while(Robot::Hot == false || t.Get()>5.0f) { //wait for hot to be true or until five seconds pass
-			
-		}
-		Robot::claw->fire(); //execute fire command
-			
+	while(RobotMap::driveenLeft->Get() > -4000 || RobotMap::driveenRight->Get() < 4000) 
+	{
+		
+	} //if the robot has turned enough
+	RobotMap::driveLeftDrive->Set(0); //stop turning
+	RobotMap::driveRightDrive->Set(0); //stop turning
+	Robot::claw->lifter->Set(-0.3f);
+	while(Robot::claw->pot1->GetValue()>20)
+	{
+		
 	}
+	Robot::claw->lifter->Set(0.0f);
+	while(Robot::Hot == false || t.Get()>5.0f) { //wait for hot to be true or until five seconds pass
+		
+	}
+	Robot::claw->fire(); //execute fire command
 }
 
 // Called repeatedly when this Command is scheduled to run
