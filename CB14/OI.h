@@ -34,6 +34,7 @@ private:
 	JoystickButton* joyPadY;
 	JoystickButton* joyPadA;
 	JoystickButton* joyPad7;
+	JoystickButton* joyPad8;
 public:
 	OI();
  

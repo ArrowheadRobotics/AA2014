@@ -12,7 +12,7 @@
 #include "TankDrive.h"
 #include "../Subsystems/Drive.h"
 
-
+int ctr=0;
 TankDrive::TankDrive() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -29,6 +29,13 @@ void TankDrive::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void TankDrive::Execute() {
 	Robot::drive->M_Drive(Robot::oi->getjoy1(), Robot::oi->getjoy2()); //run the M_Drive command
+	printf("%d\n",Robot::claw->pot1->GetValue());
+	//printf("%d\n",Robot::claw->ballinSwitch->Get());
+	ctr++;
+	if(!Robot::claw->ballinSwitch->Get() && Robot::arm->roll1->Get()==Relay::kReverse && ctr%10==0)
+	{
+		Robot::arm->roll1->Set(Relay::kOff);
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()

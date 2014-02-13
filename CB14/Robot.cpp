@@ -65,15 +65,15 @@ void Robot::TeleopInit() {
 void Robot::TeleopPeriodic() {
 	if (autonomousCommand != NULL)
 		Scheduler::GetInstance()->Run();
-	try
-	{
-		string val = "Hot";
-		Robot::Hot = Robot::table->GetBoolean(val);
-	}
-	catch(exception& e)
-	{
-		printf("crashed %s", e.what());
-	}
+//	try
+//	{
+//		string val = "Hot";
+//		Robot::Hot = Robot::table->GetBoolean(val);
+//	}
+//	catch(exception& e)
+//	{
+//		printf("crashed %s", e.what());
+//	}
 }
 
 void Robot::TestPeriodic() {

@@ -28,7 +28,7 @@ void ClawDown::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ClawDown::Execute() {
-	if(Robot::claw->pot1->GetValue()<=POTBOTTOM)
+	if(Robot::claw->pot1->GetValue()>=POTBOTTOM)
 		Robot::claw->lifter->Set(STOPSPEED); //move down
 	else
 	{

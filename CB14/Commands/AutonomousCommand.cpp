@@ -26,26 +26,65 @@ AutonomousCommand::AutonomousCommand() {
 void AutonomousCommand::Initialize() {
 	t.Start(); //starts timer
 	t.Reset(); //resets timer to zero
+	Robot::arm->roll1->Set(Relay::kReverse);
+	RobotMap::armSol1->Set(false); //turns off sol to lower arm
+	RobotMap::armSol2->Set(true);
 	RobotMap::driveenLeft->Reset(); //resets left encoder
 	RobotMap::driveenRight->Reset(); //resets right encoder
-	RobotMap::driveLeftDrive->Set(FORWARDSPEED); //turns right
-	RobotMap::driveRightDrive->Set(FORWARDSPEED*-1); //turns right faster
+	RobotMap::driveLeftDrive->Set(FORWARDSPEED*-1); //turns right
+	RobotMap::driveRightDrive->Set(FORWARDSPEED*1.15); //turns right faster
 	
-	while(RobotMap::driveenLeft->Get() > ENCODERDISTANCE*-1 || RobotMap::driveenRight->Get() < ENCODERDISTANCE) 
+//	double d=-2*(1-((Robot::claw->pot1->GetValue()-POTBOTTOM)/(FIRINGPOINT-POTBOTTOM)));
+	while(RobotMap::driveenLeft->Get() > ENCODERDISTANCE*-1 || RobotMap::driveenRight->Get() > ENCODERDISTANCE*-1) 
 	{
-		
+		if(!Robot::claw->ballinSwitch->Get() && Robot::arm->roll1->Get()==Relay::kReverse)
+		{
+			Robot::arm->roll1->Set(Relay::kOff);
+		}
+//		if(RobotMap::driveenLeft->Get() <= ENCODERDISTANCE*-1)
+//		{
+//			RobotMap::driveLeftDrive->Set(STOPSPEED);
+//		}
+//		if(RobotMap::driveenRight->Get() <= ENCODERDISTANCE*-1)
+//		{
+//			RobotMap::driveRightDrive->Set(STOPSPEED);
+//		}
+		//printf("Left:%d		Right:%d\n",RobotMap::driveenLeft->Get(),RobotMap::driveenRight->Get());
+//		while(Robot::claw->pot1->GetValue()!=FIRINGPOINT && !Robot::oi->getjoythumb1()->Get())
+//		{
+//			d=-2*(1-((Robot::claw->pot1->GetValue()-POTBOTTOM)/(FIRINGPOINT-POTBOTTOM)));
+//			Robot::claw->lifter->Set(d);
+//			if(d<0.05f && d>-0.05f)
+//			{
+//				d=0;
+//			}
+//		}
 	} //if the robot has turned enough
+	Robot::arm->roll1->Set(Relay::kOff);
 	RobotMap::driveLeftDrive->Set(STOPSPEED); //stop turning
 	RobotMap::driveRightDrive->Set(STOPSPEED); //stop turning
+	//double i=-2*(1-((Robot::claw->pot1->GetValue()-POTBOTTOM)/(FIRINGPOINT-POTBOTTOM)));
 	Robot::claw->lifter->Set(DOWNSPEED);
-	while(Robot::claw->pot1->GetValue()>FIRINGPOINT)
+	while(Robot::claw->pot1->GetValue()<430)
 	{
 		
 	}
 	Robot::claw->lifter->Set(STOPSPEED);
-	while(Robot::Hot == false && t.Get()<HALFAUTO) { //wait for hot to be true or until five seconds pass
-		
+	
+	while(Robot::claw->pot1->GetValue()!=FIRINGPOINT && !Robot::oi->getjoythumb1()->Get())
+	{
+		if(!Robot::claw->ballinSwitch->Get() && Robot::arm->roll1->Get()==Relay::kReverse)
+		{
+			Robot::arm->roll1->Set(Relay::kOff);
+		}
+		//i=-2*(1-((Robot::claw->pot1->GetValue()-POTBOTTOM)/(FIRINGPOINT-POTBOTTOM)));
+		Robot::claw->lifter->Set(-2*(1-((Robot::claw->pot1->GetValue()-POTBOTTOM)/(400-POTBOTTOM))));
+		printf("%d\n",Robot::claw->pot1->GetValue());
 	}
+	Robot::claw->lifter->Set(STOPSPEED);
+	//while(Robot::Hot == false && t.Get()<HALFAUTO) { //wait for hot to be true or until five seconds pass
+	//	
+	//}
 	Robot::claw->fire(); //execute fire command
 }
 

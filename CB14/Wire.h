@@ -36,6 +36,7 @@
 #define ioBALLSWITCH 5
 #define ioCOMPPRESSURESW 10
 #define ioANALOGPOT 1
+#define ioBALLINSWITCH 6
 
 #endif
 
