@@ -42,6 +42,7 @@ public:
 	static SpeedController* clawLifter;
 	static Solenoid* armSol1;
 	static Solenoid* armSol2;
+	static Relay* led;
 
 
 	static void init();

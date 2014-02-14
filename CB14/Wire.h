@@ -12,6 +12,7 @@
 //RELAY/
 #define portROLLER 2
 #define portCOMPRESSOR 1
+#define portLED 3
 
 //MODULES
 #define moduleONE 1
