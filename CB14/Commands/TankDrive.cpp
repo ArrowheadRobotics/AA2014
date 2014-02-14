@@ -35,6 +35,8 @@ void TankDrive::Execute() {
 	if(!Robot::claw->ballinSwitch->Get() && Robot::arm->roll1->Get()==Relay::kReverse && ctr%10==0)
 	{
 		Robot::arm->roll1->Set(Relay::kOff);
+		RobotMap::armSol1->Set(false);
+		RobotMap::armSol2->Set(true);
 	}
 }
 
