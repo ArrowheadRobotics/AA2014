@@ -70,6 +70,8 @@ void AutonomousCommand::Initialize() {
 		
 	}
 	Robot::claw->lifter->Set(STOPSPEED);
+	RobotMap::armSol1->Set(true);
+	RobotMap::armSol2->Set(false);
 	
 	while(Robot::claw->pot1->GetValue()!=FIRINGPOINT && !Robot::oi->getjoythumb1()->Get())
 	{
@@ -81,11 +83,20 @@ void AutonomousCommand::Initialize() {
 		Robot::claw->lifter->Set(-2*(1-((Robot::claw->pot1->GetValue()-POTBOTTOM)/(400-POTBOTTOM))));
 		printf("%d\n",Robot::claw->pot1->GetValue());
 	}
+//	RobotMap::armSol1->Set(true);
+//	RobotMap::armSol2->Set(false);
 	Robot::claw->lifter->Set(STOPSPEED);
 	//while(Robot::Hot == false && t.Get()<HALFAUTO) { //wait for hot to be true or until five seconds pass
 	//	
 	//}
+	t.Reset();
+	while(t.Get()<0.5f)
+	{
+		Robot::drive->M_Drive(Robot::oi->getjoy1(), Robot::oi->getjoy2());
+	}
 	Robot::claw->fire(); //execute fire command
+	RobotMap::driveLeftDrive->Set(STOPSPEED); //stop turning
+	RobotMap::driveRightDrive->Set(STOPSPEED);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -101,12 +112,14 @@ bool AutonomousCommand::IsFinished() {
 
 // Called once after isFinished returns true
 void AutonomousCommand::End() {
-	
+	RobotMap::driveLeftDrive->Set(STOPSPEED); //stop turning
+	RobotMap::driveRightDrive->Set(STOPSPEED);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void AutonomousCommand::Interrupted() {
-	
+	RobotMap::driveLeftDrive->Set(STOPSPEED); //stop turning
+	RobotMap::driveRightDrive->Set(STOPSPEED);
 }
 

@@ -50,13 +50,13 @@ void Claw::fire()
 	z.Reset();
 	Robot::claw->shooterSol1->Set(true);
 	Robot::claw->shooterSol2->Set(false);
-	RobotMap::armSol1->Set(true);
-	RobotMap::armSol2->Set(false); //Lifts the Arm up
-	printf("armup");
-	while(z.Get()<ARMTOTRIGGER)
-	{
-		Robot::drive->M_Drive(Robot::oi->getjoy1(), Robot::oi->getjoy2());
-	}
+//	RobotMap::armSol1->Set(true);
+//	RobotMap::armSol2->Set(false); //Lifts the Arm up
+//	printf("armup");
+//	while(z.Get()<ARMTOTRIGGER)
+//	{
+//		Robot::drive->M_Drive(Robot::oi->getjoy1(), Robot::oi->getjoy2());
+//	}
 	Robot::claw->triggerSol1->Set(false);		//Pull in Trigger
 	Robot::claw->triggerSol2->Set(true);		//Pull in Trigger
 	printf("triggerdown");
@@ -71,7 +71,7 @@ void Claw::fire()
 	Robot::claw->shooterSol2->Set(true);
 	z.Reset();
 	printf("inloop2");
-	while(Robot::claw->ballSwitch->Get() && !Robot::oi->getjoythumb1()->Get() && z.Get()<TRIGGERDELAY)
+	while(Robot::claw->ballSwitch->Get() && !Robot::oi->getjoythumb1()->Get())// && z.Get()<TRIGGERDELAY)
 	{
 		Robot::drive->M_Drive(Robot::oi->getjoy1(), Robot::oi->getjoy2());
 	}
