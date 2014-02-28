@@ -22,6 +22,7 @@ OI* Robot::oi = 0;
 NetworkTable* Robot::table = 0;
 
 Timer a;
+string Robot::Hot = "false";
 
 void Robot::RobotInit() {
 	RobotMap::init();
@@ -47,15 +48,52 @@ void Robot::RobotInit() {
 	RobotMap::led->Set(Relay::kOn);
 	a.Start();
 	a.Reset();
+	//Hot=0;
   }
 	
 void Robot::AutonomousInit() {
 	if (autonomousCommand != NULL) //if the autonomous command exists upon startup
 		autonomousCommand->Start(); //run it
+	
+	try
+	{
+		string val = "hot";
+		Robot::Hot = Robot::table->GetString(val);
+		if(Robot::Hot=="True")
+		{
+			printf("True\n");
+		}
+		else
+		{
+			printf("False\n");
+		}
+	}
+	catch(exception& e)
+	{
+		//printf("crashed %s", e.what());
+	}
 }
 	
 void Robot::AutonomousPeriodic() {
 	Scheduler::GetInstance()->Run();
+	
+	try
+	{
+		string val = "hot";
+		Robot::Hot = Robot::table->GetString(val);
+		if(Robot::Hot=="True")
+		{
+			printf("True\n");
+		}
+		else
+		{
+			printf("False\n");
+		}
+	}
+	catch(exception& e)
+	{
+		//printf("crashed %s", e.what());
+	}
 }
 	
 void Robot::TeleopInit() {
@@ -66,28 +104,39 @@ void Robot::TeleopInit() {
 	autonomousCommand->Cancel();
 	//printf("Testing\n");
 	autonomousCommand->Cancel(); //end autonomous at start of teleop period
+	
+	RobotMap::led->Set(Relay::kOn);
 }
 	
 void Robot::TeleopPeriodic() {
 	if (autonomousCommand != NULL)
 		Scheduler::GetInstance()->Run();
-	if(a.Get() >= 140) {
-		if((a.Get() >= 140 && a.Get() < 141) || (a.Get() >= 142 && a.Get() < 143) || (a.Get() >= 144 && a.Get() < 145) || (a.Get() >= 146 && a.Get() < 147) || (a.Get() >= 148 && a.Get() < 149)) {
+	if(int(a.Get()) >= 140) {
+		//if((a.Get() >= 140 && a.Get() < 141) || (a.Get() >= 142 && a.Get() < 143) || (a.Get() >= 144 && a.Get() < 145) || (a.Get() >= 146 && a.Get() < 147) || (a.Get() >= 148 && a.Get() < 149)) {
+		if(int(a.Get())%2 == 0) {
 			RobotMap::led->Set(Relay::kOff);
 		}
 		else {
 			RobotMap::led->Set(Relay::kOn);
 		}
 	}
-//	try
-//	{
-//		string val = "Hot";
-//		Robot::Hot = Robot::table->GetBoolean(val);
-//	}
-//	catch(exception& e)
-//	{
-//		printf("crashed %s", e.what());
-//	}
+	try
+	{
+		string val = "hot";
+		Robot::Hot = Robot::table->GetString(val);
+		if(Robot::Hot=="True")
+		{
+			printf("True\n");
+		}
+		else
+		{
+			printf("False\n");
+		}
+	}
+	catch(exception& e)
+	{
+		//printf("crashed %s", e.what());
+	}
 }
 
 void Robot::TestPeriodic() {

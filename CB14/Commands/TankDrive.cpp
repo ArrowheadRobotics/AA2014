@@ -12,7 +12,9 @@
 #include "TankDrive.h"
 #include "../Subsystems/Drive.h"
 
+
 int ctr=0;
+
 TankDrive::TankDrive() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -23,7 +25,7 @@ TankDrive::TankDrive() {
 
 // Called just before this Command runs the first time
 void TankDrive::Initialize() {
-	
+
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -32,11 +34,29 @@ void TankDrive::Execute() {
 	printf("%d\n",Robot::claw->pot1->GetValue());
 	//printf("%d\n",Robot::claw->ballinSwitch->Get());
 	ctr++;
+	printf("Left:%d		Right:%d\n",Robot::drive->enLeft->GetRaw(),Robot::drive->enRight->GetRaw());
+	//printf("%s\n",Robot::Hot);
+	//printf("%f\n",Robot::oi->getjoyPad()->GetAxis(Joystick::kThrottleAxis));
+	if(Robot::oi->getjoyPad()->GetAxis(Joystick::kThrottleAxis)>0.5f)
+	{
+		Robot::arm->roll1->Set(Relay::kForward);
+	}
+	else if(Robot::oi->getjoyPad()->GetAxis(Joystick::kThrottleAxis)<-0.5f)
+	{
+		Robot::arm->roll1->Set(Relay::kReverse);
+	}
+	else
+	{
+		Robot::arm->roll1->Set(Relay::kOff);
+	}
 	if(!Robot::claw->ballinSwitch->Get() && Robot::arm->roll1->Get()==Relay::kReverse && ctr%10==0)
 	{
 		Robot::arm->roll1->Set(Relay::kOff);
-		RobotMap::armSol1->Set(false);
-		RobotMap::armSol2->Set(true);
+//		RobotMap::clawarmSol->Set(false);
+	}
+	if(!Robot::claw->ballinSwitch->Get())
+	{
+		//RobotMap::clawarmSol->Set(false);
 	}
 }
 

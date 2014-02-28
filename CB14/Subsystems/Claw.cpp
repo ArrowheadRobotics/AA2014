@@ -48,8 +48,12 @@ void Claw::fire()
 {
 	Robot::claw->lifter->Set(STOPSPEED);
 	z.Reset();
-	Robot::claw->shooterSol1->Set(true);
-	Robot::claw->shooterSol2->Set(false);
+	RobotMap::clawtwoshotSol1->Set(false);
+	RobotMap::clawtwoshotSol2->Set(false);
+	//RobotMap::clawfourshotSol1->Set(false);
+	//RobotMap::clawfourshotSol2->Set(false);
+//	Robot::claw->shooterSol1->Set(true);
+//	Robot::claw->shooterSol2->Set(false);
 //	RobotMap::armSol1->Set(true);
 //	RobotMap::armSol2->Set(false); //Lifts the Arm up
 //	printf("armup");
@@ -57,18 +61,20 @@ void Claw::fire()
 //	{
 //		Robot::drive->M_Drive(Robot::oi->getjoy1(), Robot::oi->getjoy2());
 //	}
-	Robot::claw->triggerSol1->Set(false);		//Pull in Trigger
-	Robot::claw->triggerSol2->Set(true);		//Pull in Trigger
+	RobotMap::clawtriggerSol->Set(true);		//Pull in Trigger
 	printf("triggerdown");
 	while(z.Get()<TRIGGERTORESET)
 	{
 		Robot::drive->M_Drive(Robot::oi->getjoy1(), Robot::oi->getjoy2());
 	}
 	printf("outloop1");
-	RobotMap::armSol1->Set(false);
-	RobotMap::armSol2->Set(true);
-	Robot::claw->shooterSol1->Set(false);
-	Robot::claw->shooterSol2->Set(true);
+	//RobotMap::clawarmSol->Set(false);
+	/*RobotMap::armSol1->Set(false);
+	RobotMap::armSol2->Set(true);*/
+	RobotMap::clawtwoshotSol1->Set(true);
+	RobotMap::clawtwoshotSol2->Set(true);
+	RobotMap::clawfourshotSol1->Set(true);
+	RobotMap::clawfourshotSol2->Set(true);
 	z.Reset();
 	printf("inloop2");
 	while(Robot::claw->ballSwitch->Get() && !Robot::oi->getjoythumb1()->Get())// && z.Get()<TRIGGERDELAY)
@@ -76,10 +82,16 @@ void Claw::fire()
 		Robot::drive->M_Drive(Robot::oi->getjoy1(), Robot::oi->getjoy2());
 	}
 	printf("\noutloop2\n");
-	Robot::claw->triggerSol1->Set(true);		
-	Robot::claw->triggerSol2->Set(false);
-	Robot::claw->shooterSol1->Set(true);
-	Robot::claw->shooterSol2->Set(false);
+	RobotMap::clawtriggerSol->Set(false);
+	z.Reset();
+	while(z.Get()<0.1f)
+	{
+		Robot::drive->M_Drive(Robot::oi->getjoy1(), Robot::oi->getjoy2());
+	}
+	RobotMap::clawtwoshotSol1->Set(false);
+	RobotMap::clawtwoshotSol2->Set(false);
+	RobotMap::clawfourshotSol1->Set(false);
+	RobotMap::clawfourshotSol2->Set(false);
 	
 }
 

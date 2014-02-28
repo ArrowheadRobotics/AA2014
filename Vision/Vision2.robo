@@ -87,20 +87,24 @@
 <VBScript_Program>
   <script>list = GetArrayVariable("MEP_COORDINATES")
 
-if ubound(list)&gt;0 then
-	if ubound(list)&gt;8 then
+if ubound(list)&gt;0 then
+	if ubound(list)&gt;8 then
 		SetVariable "width", list(8)-list(10)
-		SetVariable "height", list(11)-list(15)
-	end if
+		SetVariable "height", list(11)-list(15)
+	end if
 	if ubound(list)&lt;8 then
 		SetVariable "width", list(0)-list(2)
-		SetVariable "height", list(3)-list(7)
+		SetVariable "height", list(3)-list(7)
 	end if
-end if
-
-SetVariable "hot", false
-if GetVariable("width")&gt;GetVariable("height") then
-	SetVariable "hot", true
+end if
+
+width2=GetVariable("width")
+
+if width2&gt;0 then
+	SetVariable "hot", true
+	if ((GetVariable("height")+1)/width2)&gt;2 then
+		SetVariable "hot", false
+	end if
 end if</script>
   <source_mode>gui</source_mode>
   <tab_size_index>4</tab_size_index>

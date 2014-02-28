@@ -43,6 +43,14 @@ public:
 	static Solenoid* armSol1;
 	static Solenoid* armSol2;
 	static Relay* led;
+	
+	static Solenoid* clawtriggerSol;
+	static Solenoid* clawtwoshotSol2;
+	static Solenoid* clawtwoshotSol1;
+	static Solenoid* clawfourshotSol1;
+	static Solenoid* clawfourshotSol2;
+	static Solenoid* clawarmSol;
+	
 
 
 	static void init();

@@ -20,8 +20,10 @@ ArmDrop::ArmDrop() {
 
 // Called just before this Command runs the first time
 void ArmDrop::Initialize() {
-	RobotMap::armSol1->Set(false); //turns off sol to lower arm
-	RobotMap::armSol2->Set(true);
+	//RobotMap::clawtriggerSol->Set(false);
+	//RobotMap::armSol1->Set(false); //turns off sol to lower arm
+	//RobotMap::armSol2->Set(true);
+	RobotMap::clawarmSol->Set(false);
 }
 
 // Called repeatedly when this Command is scheduled to run

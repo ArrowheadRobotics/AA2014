@@ -35,6 +35,10 @@ private:
 	JoystickButton* joyPadA;
 	JoystickButton* joyPad7;
 	JoystickButton* joyPad8;
+	JoystickButton* joyPad9;
+	JoystickButton* joy2btn2;	
+	JoystickButton* joyPad12;	
+	
 public:
 	OI();
  
