@@ -41,6 +41,9 @@ void Drive::InitDefaultCommand() {
 
 void Drive::M_Drive(Joystick* joy1, Joystick* joy2){ //activate tankdrive
 	//printf("function1");
-	driveTrain->TankDrive(joy1, joy2);
+	//driveTrain->TankDrive(joy1, joy2);
 	//printf("function2");
+	LeftDrive->Set(1*joy1->GetY()*joy1->GetY()*joy1->GetY());//*(joy1->GetY()/abs((joy1->GetY()*100000)/100000)));
+	RightDrive->Set(-1*joy2->GetY()*joy2->GetY()*joy2->GetY());//*(joy2->GetY()/abs((joy2->GetY()*100000)/100000)));
+	//   LeftDrive->Set((joy1->GetY()*joy1->GetY())*(joy1->GetY()/(abs(joy1->GetY()*100000)/100000)));
 }

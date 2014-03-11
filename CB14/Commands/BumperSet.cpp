@@ -26,7 +26,7 @@ void BumperSet::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void BumperSet::Execute() {
-	Robot::claw->lifter->Set(-2*(1-((Robot::claw->pot1->GetValue()-POTBOTTOM)/(395-POTBOTTOM))));
+	Robot::claw->lifter->Set(-2*(1-((Robot::claw->pot1->GetValue()-POTBOTTOM)/(405-POTBOTTOM))));
 }
 
 // Make this return true when this Command no longer needs to run execute()

@@ -9,7 +9,7 @@
 #define FORWARDSPEED 0.5f
 #define BACKSPEED -0.5f
 #define HALFAUTO 5.0f
-#define ENCODERDISTANCE 2000
+#define ENCODERDISTANCE 4000
 //AUTO=4400
 
 //Claw

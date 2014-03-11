@@ -20,9 +20,10 @@ Truss::Truss() {
 
 // Called just before this Command runs the first time
 void Truss::Initialize() {
+	RobotMap::clawarmSol->Set(true);
 	Robot::claw->lifter->Set(-1.0);
-	RobotMap::armSol1->Set(true);
-	RobotMap::armSol2->Set(false);
+	//RobotMap::armSol1->Set(true);
+	//RobotMap::armSol2->Set(false);
 	while(Robot::claw->pot1->GetValue()>290)
 	{
 		Robot::drive->M_Drive(Robot::oi->getjoy1(), Robot::oi->getjoy2());

@@ -36,16 +36,24 @@ void AutonomousCommand::Initialize() {
 	t.Start(); //starts timer
 	t.Reset(); //resets timer to zero
 	Robot::arm->roll1->Set(Relay::kReverse);
-	RobotMap::armSol1->Set(false); //turns off sol to lower arm
-	RobotMap::armSol2->Set(true);
+	//RobotMap::armSol1->Set(false); //turns off sol to lower arm
+	//RobotMap::armSol2->Set(true);
 	RobotMap::driveenLeft->Reset(); //resets left encoder
 	RobotMap::driveenRight->Reset(); //resets right encoder
-	RobotMap::driveLeftDrive->Set(FORWARDSPEED*-1); //turns right
-	RobotMap::driveRightDrive->Set(FORWARDSPEED*1.15); //turns right faster
+	Robot::drive->LeftDrive->Set(FORWARDSPEED*-.87); //turns right
+	Robot::drive->RightDrive->Set(FORWARDSPEED*1); //turns right faster
 	
 //	double d=-2*(1-((Robot::claw->pot1->GetValue()-POTBOTTOM)/(FIRINGPOINT-POTBOTTOM)));
-	while(RobotMap::driveenLeft->Get() > ENCODERDISTANCE*-1 || RobotMap::driveenRight->Get() > ENCODERDISTANCE*-1) 
+	while(RobotMap::driveenLeft->Get() > (ENCODERDISTANCE+100)*-1 || RobotMap::driveenRight->Get() > ENCODERDISTANCE*-1) 
 	{
+		if(RobotMap::driveenLeft->Get() < (ENCODERDISTANCE+100)*-1)
+		{
+			Robot::drive->LeftDrive->Set(STOPSPEED);
+		}
+		if(RobotMap::driveenRight->Get() < ENCODERDISTANCE*-1)
+		{
+			Robot::drive->RightDrive->Set(STOPSPEED);
+		}
 		if(!Robot::claw->ballinSwitch->Get() && Robot::arm->roll1->Get()==Relay::kReverse)
 		{
 			Robot::arm->roll1->Set(Relay::kOff);
@@ -53,11 +61,11 @@ void AutonomousCommand::Initialize() {
 		printf("autodrive\n");
 //		if(RobotMap::driveenLeft->Get() <= ENCODERDISTANCE*-1)
 //		{
-//			RobotMap::driveLeftDrive->Set(STOPSPEED);
+//			Robot::drive->LeftDrive->Set(STOPSPEED);
 //		}
 //		if(RobotMap::driveenRight->Get() <= ENCODERDISTANCE*-1)
 //		{
-//			RobotMap::driveRightDrive->Set(STOPSPEED);
+//			Robot::drive->RightDrive->Set(STOPSPEED);
 //		}
 		//printf("Left:%d		Right:%d\n",RobotMap::driveenLeft->Get(),RobotMap::driveenRight->Get());
 //		while(Robot::claw->pot1->GetValue()!=FIRINGPOINT && !Robot::oi->getjoythumb1()->Get())
@@ -70,9 +78,10 @@ void AutonomousCommand::Initialize() {
 //			}
 //		}
 	} //if the robot has turned enough
+	RobotMap::clawarmSol->Set(true);
 	Robot::arm->roll1->Set(Relay::kOff);
-	RobotMap::driveLeftDrive->Set(STOPSPEED); //stop turning
-	RobotMap::driveRightDrive->Set(STOPSPEED); //stop turning
+	Robot::drive->LeftDrive->Set(STOPSPEED); //stop turning
+	Robot::drive->RightDrive->Set(STOPSPEED); //stop turning
 	//double i=-2*(1-((Robot::claw->pot1->GetValue()-POTBOTTOM)/(FIRINGPOINT-POTBOTTOM)));
 	Robot::claw->lifter->Set(DOWNSPEED);
 	while(Robot::claw->pot1->GetValue()<430)
@@ -80,8 +89,8 @@ void AutonomousCommand::Initialize() {
 		printf("%d\n",setHot);
 	}
 	Robot::claw->lifter->Set(STOPSPEED);
-	RobotMap::armSol1->Set(true);
-	RobotMap::armSol2->Set(false);
+	//RobotMap::armSol1->Set(true);
+	//RobotMap::armSol2->Set(false);
 	
 	while(Robot::claw->pot1->GetValue()!=FIRINGPOINT && !Robot::oi->getjoythumb1()->Get())
 	{
@@ -97,21 +106,25 @@ void AutonomousCommand::Initialize() {
 //	RobotMap::armSol1->Set(true);
 //	RobotMap::armSol2->Set(false);
 	Robot::claw->lifter->Set(STOPSPEED);
-	RobotMap::driveLeftDrive->Set(0); //stop turning
-	RobotMap::driveRightDrive->Set(0);
+	Robot::drive->LeftDrive->Set(0); //stop turning
+	Robot::drive->RightDrive->Set(0);
 	while(setHot==0 && t.Get()<HALFAUTO) { //wait for hot to be true or until five seconds pass
 		//Wait(0.1f);
+		Robot::drive->LeftDrive->Set(0); //stop turning
+		Robot::drive->RightDrive->Set(0);
 	}
 	
 	t.Reset();
 	while(t.Get()<0.5f)
 	{
-		RobotMap::driveLeftDrive->Set(0); //stop turning
-		RobotMap::driveRightDrive->Set(0);
+		Robot::drive->LeftDrive->Set(0); //stop turning
+		Robot::drive->RightDrive->Set(0);
 	}
+	RobotMap::clawfourshotSol1->Set(true);
+	RobotMap::clawfourshotSol2->Set(true);
 	Robot::claw->fire(); //execute fire command
-	RobotMap::driveLeftDrive->Set(0); //stop turning
-	RobotMap::driveRightDrive->Set(0);
+	Robot::drive->LeftDrive->Set(0); //stop turning
+	Robot::drive->RightDrive->Set(0);
 	
 	End();
 }
@@ -129,14 +142,14 @@ bool AutonomousCommand::IsFinished() {
 
 // Called once after isFinished returns true
 void AutonomousCommand::End() {
-	RobotMap::driveLeftDrive->Set(0); //stop turning
-	RobotMap::driveRightDrive->Set(0);
+	Robot::drive->LeftDrive->Set(0); //stop turning
+	Robot::drive->RightDrive->Set(0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void AutonomousCommand::Interrupted() {
-	RobotMap::driveLeftDrive->Set(0); //stop turning
-	RobotMap::driveRightDrive->Set(0);
+	Robot::drive->LeftDrive->Set(0); //stop turning
+	Robot::drive->RightDrive->Set(0);
 }
 
