@@ -11,6 +11,7 @@
 
 #include "TankDrive.h"
 #include "../Subsystems/Drive.h"
+#include "../Constants.h"
 
 
 int ctr=0;
@@ -32,6 +33,7 @@ void TankDrive::Initialize() {
 void TankDrive::Execute() {
 	Robot::drive->M_Drive(Robot::oi->getjoy1(), Robot::oi->getjoy2()); //run the M_Drive command
 	printf("%d\n",Robot::claw->pot1->GetValue());
+	printf("%f\n",-1*(1-((Robot::claw->pot1->GetValue()-POTBOTTOM)/(440-POTBOTTOM))));
 	//printf("%d\n",Robot::claw->ballinSwitch->Get());
 	ctr++;
 	printf("Left:%d		Right:%d\n",Robot::drive->enLeft->GetRaw(),Robot::drive->enRight->GetRaw());

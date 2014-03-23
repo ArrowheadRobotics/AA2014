@@ -24,15 +24,8 @@ AutonomousCommand::AutonomousCommand() {
 
 // Called just before this Command runs the first time
 void AutonomousCommand::Initialize() {
+	string val = "hot";
 	int setHot=0;
-	if(Robot::Hot=="True")
-	{
-		setHot=1;
-	}
-	if(Robot::Hot=="False")
-	{
-		setHot=0;
-	}
 	t.Start(); //starts timer
 	t.Reset(); //resets timer to zero
 	Robot::arm->roll1->Set(Relay::kReverse);
@@ -59,6 +52,11 @@ void AutonomousCommand::Initialize() {
 			Robot::arm->roll1->Set(Relay::kOff);
 		}
 		printf("autodrive\n");
+		t.Reset();
+		if(t.Get()<1.1f)
+		{
+			Robot::Hot = Robot::table->GetString(val);
+		}
 //		if(RobotMap::driveenLeft->Get() <= ENCODERDISTANCE*-1)
 //		{
 //			Robot::drive->LeftDrive->Set(STOPSPEED);
@@ -78,6 +76,14 @@ void AutonomousCommand::Initialize() {
 //			}
 //		}
 	} //if the robot has turned enough
+	if(Robot::Hot=="True")
+	{
+		setHot=1;
+	}
+	if(Robot::Hot=="False")
+	{
+		setHot=0;
+	}
 	RobotMap::clawarmSol->Set(true);
 	Robot::arm->roll1->Set(Relay::kOff);
 	Robot::drive->LeftDrive->Set(STOPSPEED); //stop turning
@@ -99,7 +105,7 @@ void AutonomousCommand::Initialize() {
 			Robot::arm->roll1->Set(Relay::kOff);
 		}
 		//i=-2*(1-((Robot::claw->pot1->GetValue()-POTBOTTOM)/(FIRINGPOINT-POTBOTTOM)));
-		Robot::claw->lifter->Set(-2*(1-((Robot::claw->pot1->GetValue()-POTBOTTOM)/(400-POTBOTTOM))));
+		Robot::claw->lifter->Set(-5*(1-((Robot::claw->pot1->GetValue()-POTBOTTOM)/(400-POTBOTTOM))));
 		//printf("%d\n",Robot::claw->pot1->GetValue());
 		printf("%d\n",setHot);
 	}

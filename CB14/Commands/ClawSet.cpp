@@ -26,7 +26,7 @@ void ClawSet::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ClawSet::Execute() {
-	Robot::claw->lifter->Set(-2*(1-((Robot::claw->pot1->GetValue()-POTBOTTOM)/(430-POTBOTTOM))));
+	Robot::claw->lifter->Set(-5*(1-((Robot::claw->pot1->GetValue()-POTBOTTOM)/(440-POTBOTTOM))));
 }
 
 // Make this return true when this Command no longer needs to run execute()
